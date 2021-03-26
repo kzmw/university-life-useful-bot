@@ -1,12 +1,8 @@
 from flask import Flask, request, abort
 import os
-
-try:
-    import MySQLdb
-except:
-    import PyMySQL
-    PyMySQL.install_as_MySQLdb()
-    import MySQLdb
+import PyMySQL
+PyMySQL.install_as_MySQLdb()
+import MySQLdb
 
 from linebot import (
     LineBotApi, WebhookHandler
