@@ -18,7 +18,7 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-#環境変数取得
+# 環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 DB_USERNAME = os.environ["DB_USERNAME"]
@@ -30,6 +30,7 @@ DB_TABLE = "linedata"
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -48,157 +49,161 @@ def callback():
 
     return 'OK'
 
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = event.message.text
     if "おはよう" in message:
         reply = "おはようございます！"
-            line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=reply))
     elif "こんにちは" in message:
         reply = "こんにちは！"
-            line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=reply))
     elif "こんばんは" in message:
         reply = "こんばんは！"
-            line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=reply))
     elif "時間割" in message:
         if "今日" in message:
             reply = "今日の時間割"
-                line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
+            line_bot_api.reply_message(
+                event.reply_token, TextSendMessage(text=reply))
         elif "明日" in message:
             reply = "明日の時間割"
-                line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
-        else:reply = "いつの時間割を返信するか送ってください！\n例：「今日の時間割」"
             line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
+                event.reply_token, TextSendMessage(text=reply))
+        else:
+            reply = "いつの時間割を返信するか送ってください！\n例：「今日の時間割」"
+            line_bot_api.reply_message(
+                event.reply_token, TextSendMessage(text=reply))
     elif "天気" in message:
         if "今日" in message:
-            json_open = requests.get('http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3', 'r')
+            json_open = requests.get(
+                'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3', 'r')
             json_load = json_open.json()
-            reply = { "type": "flex",
-         "altText": "今日の天気" + "：" + json_load['daily'][0]['weather'][0]['description'],
-          "contents": {
-  "type": "bubble",
-  "header": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "text",
-        "text": "今日の天気",
-        "color": "#FFFFFF",
-        "margin": "none",
-        "weight": "bold",
-        "gravity": "center",
-        "size": "xl"
-      }
-    ],
-    "backgroundColor": "#3cb371",
-    "margin": "none"
-  },
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "box",
-        "layout": "horizontal",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [
-                  {
-                    "type": "image",
-                    "url": "http://openweathermap.org/img/wn/" + json_load['daily'][0]['weather'][0]['icon'] + "@2x.png",
-                    "size": "md",
-                    "aspectRatio": "2:1"
-                  }
-                ]
-              },
-              {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [
-                  {
-                    "type": "text",
-                    "text": json_load['daily'][0]['weather'][0]['description'],
-                    "align": "center"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "spacer",
-                "size": "md"
-              },
-              {
-                "type": "text",
-                "text": json_load['daily'][0][temp]['max'] + "℃",
-                "size" : "xl",
-                "color": "#ff6347"
-              },
-              {
-                "type": "text",
-                "text": json_load['daily'][0][temp]['min'] + "℃",
-                "size" : "xl",
-                "color": "#4169e1"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-}
-        }
-        
-        line_bot_api.reply_message(
-        event.reply_token,FlexSendMessage.new_from_json_dict(reply))
+            reply = {
+                "type": "flex",
+                "altText": "今日の天気" + "：" + json_load['daily'][0]['weather'][0]['description'],
+                "contents": {
+                        "type": "bubble",
+                        "header": {
+                            "type": "box",
+                            "layout": "vertical",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "今日の天気",
+                                    "color": "#FFFFFF",
+                                    "margin": "none",
+                                    "weight": "bold",
+                                    "gravity": "center",
+                                    "size": "xl"
+                                }
+                            ],
+                            "backgroundColor": "#3cb371",
+                            "margin": "none"
+                        },
+                    "body": {
+                            "type": "box",
+                            "layout": "vertical",
+                            "contents": [
+                                {
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "contents": [
+                                        {
+                                            "type": "box",
+                                            "layout": "vertical",
+                                            "contents": [
+                                                {
+                                                    "type": "box",
+                                                    "layout": "vertical",
+                                                    "contents": [
+                                                        {
+                                                            "type": "image",
+                                                            "url": "http://openweathermap.org/img/wn/" + json_load['daily'][0]['weather'][0]['icon'] + "@2x.png",
+                                                            "size": "md",
+                                                            "aspectRatio": "2:1"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "box",
+                                                    "layout": "vertical",
+                                                    "contents": [
+                                                        {
+                                                            "type": "text",
+                                                            "text": json_load['daily'][0]['weather'][0]['description'],
+                                                            "align": "center"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "box",
+                                            "layout": "vertical",
+                                            "contents": [
+                                                {
+                                                    "type": "spacer",
+                                                    "size": "md"
+                                                },
+                                                {
+                                                    "type": "text",
+                                                    "text": json_load['daily'][0][temp]['max'] + "℃",
+                                                    "size": "xl",
+                                                    "color": "#ff6347"
+                                                },
+                                                {
+                                                    "type": "text",
+                                                    "text": json_load['daily'][0][temp]['min'] + "℃",
+                                                    "size": "xl",
+                                                    "color": "#4169e1"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                            }
+                }
+            }
+
+        line_bot_api.reply_message(event.reply_token,FlexSendMessage.new_from_json_dict(reply))
         elif "明日" in message:
-            json_open = requests.get('http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3', 'r')
+            json_open = requests.get(
+                'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3', 'r')
             json_load = json_open.json()
             tdat = json_load['daily'][1]['weather'][0]['description']
             reply = tdat
-        line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
-        else:reply = "いつの天気を返信するか送ってください！\n例：「今日の天気」"
+            line_bot_api.reply_message(
+                event.reply_token, TextSendMessage(text=reply))
+        else:
+            reply = "いつの天気を返信するか送ってください！\n例：「今日の天気」"
+            line_bot_api.reply_message(
+                event.reply_token, TextSendMessage(text=reply))
     elif "運行情報" in message:
         reply = "運行情報"
         line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
+            event.reply_token,
+            TextSendMessage(text=reply))
     elif "設定" in message:
         reply = "設定画面を開きません。"
         line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
-    else:reply = message
+            event.reply_token,
+            TextSendMessage(text=reply))
+    else:
+        reply = message
         line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply))
+            event.reply_token,
+            TextSendMessage(text=reply))
 
 # Follow Event
+
+
 @handler.add(FollowEvent)
 def on_follow(event):
     reply_token = event.reply_token
@@ -211,11 +216,12 @@ def on_follow(event):
     # メッセージの送信
     line_bot_api.reply_message(
         reply_token=reply_token,
-        messages=TextSendMessage(text=display_name + "さん、当アカウントの友達登録ありがとうございます！\n\n【当アカウントの利用方法】\n「今日の時間割」と送信すると時間割設定画面で設定された時間割を返信します。")
+        messages=TextSendMessage(
+            text=display_name + "さん、当アカウントの友達登録ありがとうございます！\n\n【当アカウントの利用方法】\n「今日の時間割」と送信すると時間割設定画面で設定された時間割を返信します。")
     )
 
 
 if __name__ == "__main__":
-#    app.run()
+    #    app.run()
     port = int(os.getenv("PORT"))
     app.run(host="0.0.0.0", port=port)
