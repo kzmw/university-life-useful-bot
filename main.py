@@ -89,7 +89,7 @@ def handle_message(event):
                 json_load = json.loads(res.read().decode('utf-8'))
                 today = datetime.datetime.today().strftime("%Y-%m-%d")
                 reportDatetime = json_load[1]["reportDatetime"]
-                today_comparenum = reportDatetime.find('-')
+                today_comparenum = reportDatetime.find('T')
                 today_comparetxt = reportDatetime[:today_comparenum]
                 print(today_comparetxt)
                 if today != today_comparetxt:
