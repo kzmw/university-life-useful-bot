@@ -689,7 +689,7 @@ def handle_message(event):
                                 break
                         temp_max = "-"
                         temp_min = "-"
-                                                reply = {
+                        reply = {
                             "type": "flex",
                             "altText": "明日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weathers'][2],
                             "contents": {
