@@ -14,7 +14,7 @@ from linebot.models import (
     FollowEvent, UnfollowEvent, MessageEvent, PostbackEvent,
     TextMessage, TextSendMessage, TemplateSendMessage,
     ButtonsTemplate, CarouselTemplate, CarouselColumn,
-    PostbackTemplateActiond
+    PostbackTemplateAction
 )
 
 app = Flask(__name__)
