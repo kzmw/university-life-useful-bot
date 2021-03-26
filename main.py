@@ -163,7 +163,7 @@ def handle_message(event):
                                                 "contents": [
                                                     {
                                                         "type": "text",
-                                                        "text": temp_max",
+                                                        "text": temp_max,
                                                         "size": "xl",
                                                         "color": "#ff6347"
                                                     },
