@@ -84,77 +84,12 @@ def handle_message(event):
             json_open = requests.get(
                 'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3')
             json_load = json_open.json()
-            reply = {"type": "flex",
-                     "altText": "山形未歩さんを応援しよう！",
-                     "contents": {
-                         "type": "bubble",
-                         "header": {
-                             "type": "box",
-                             "layout": "vertical",
-                             "contents": [
-                                 {
-                                     "type": "text",
-                                     "text": "山形未歩さんを応援しよう！",
-                                     "decoration": "none",
-                                     "align": "center",
-                                     "size": "lg",
-                                     "margin": "none",
-                                     "weight": "bold"
-                                 }
-                             ]
-                         },
-                         "hero": {
-                             "type": "image",
-                             "url": "https://bpf.tabippo.net/2021/wp-content/uploads/2020/11/%E5%B1%B1%E5%BD%A2%EF%BC%91.jpeg",
-                             "size": "full"
-                         },
-                         "body": {
-                             "type": "box",
-                             "layout": "vertical",
-                             "contents": [
-                                 {
-                                     "type": "text",
-                                     "text": "英語科 磯田先生の教え子，山形未歩さんがSHINEという世界を旅する女子が輝くコンテストに出場しています。書類審査，グループディスカッションを突破した山形さんは，現在，3rdステージのWeb投票に挑戦しています。11/26まで1日1回投票できます。ぜひ投票しましょう！",
-                                     "wrap": True,
-                                     "size": "sm"
-                                 }
-                             ]
-                         },
-                         "footer": {
-                             "type": "box",
-                             "layout": "vertical",
-                             "contents": [
-                                 {
-                                     "type": "button",
-                                     "action": {
-                                         "type": "uri",
-                                         "label": "投票ページに移動",
-                                         "uri": "https://bpf.tabippo.net/2021/shine/b-59/"
-                                     }
-                                 },
-                                 {
-                                     "type": "text",
-                                     "text": "＊「今日の時間割」のときのみ，時間割と同時にこのメッセージを送っています。",
-                                     "wrap": True,
-                                     "size": "xs"
-                                 }
-                             ]
-                         },
-                         "styles": {
-                             "header": {
-                                 "backgroundColor": "#F9D959"
-                             },
-                             "hero": {
-                                 "separator": False
-                             }
-                         }
-                     }
-                     }
-            """ reply = {
+
+            reply = {
                 "type": "flex",
                 "altText": "今日の天気" + "：" + json_load['daily'][0]['weather'][0]['description'],
                 "contents": {
-                        "type": "bubble",
+                    "type": "bubble",
                         "header": {
                             "type": "box",
                             "layout": "vertical",
@@ -190,7 +125,7 @@ def handle_message(event):
                                                     "contents": [
                                                         {
                                                             "type": "image",
-                                                            "url": "http://openweathermap.org/img/wn/" + json_load['daily'][0]['weather'][0]['icon'] + "@2x.png",
+                                                            "url": "https://openweathermap.org/img/wn/" + json_load['daily'][0]['weather'][0]['icon'] + "@2x.png",
                                                             "size": "md",
                                                             "aspectRatio": "2:1"
                                                         }
@@ -234,9 +169,9 @@ def handle_message(event):
                                     ]
                                 }
                             ]
-                    }
+                        }
                 }
-            } """
+            }
             container_obj = FlexSendMessage.new_from_json_dict(reply)
             line_bot_api.reply_message(
                 event.reply_token, messages=container_obj)
