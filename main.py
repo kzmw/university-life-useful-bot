@@ -82,7 +82,7 @@ def handle_message(event):
     elif "天気" in message:
         if "今日" in message:
             json_open = requests.get(
-                'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3', 'r')
+                'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3')
             json_load = json_open.json()
             reply = {
                 "type": "flex",
