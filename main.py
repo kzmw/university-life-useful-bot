@@ -82,18 +82,19 @@ def handle_message(event):
                 event.reply_token, TextSendMessage(text=reply))
     elif "天気" in message:
         if "今日" in message:
-            json_open = open('https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json', 'r')
+            json_open = open(
+                'https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json', 'r')
             json_load = json.load(json_open)
             today = datetime.datetime.today().strftime("%Y-%m-%d")
             reportDatetime = json_load[1]["reportDatetime"]
             today_comparenum = reportDatetime.find('-')
             today_comparetxt = reportDatetime[:today_comparenum]
             if today != today_comparetxt:
-            reply = {
-                "type": "flex",
-                "altText": "今日の天気" + "：" + json_load[1]['timeseries'][0]['areas'][0]['weatherCodes'],
-                "contents": {
-                    "type": "bubble",
+                reply = {
+                    "type": "flex",
+                    "altText": "今日の天気" + "：" + json_load[1]['timeseries'][0]['areas'][0]['weatherCodes'],
+                    "contents": {
+                        "type": "bubble",
                         "header": {
                             "type": "box",
                             "layout": "vertical",
@@ -111,7 +112,7 @@ def handle_message(event):
                             "backgroundColor": "#3cb371",
                             "margin": "none"
                         },
-                    "body": {
+                        "body": {
                             "type": "box",
                             "layout": "vertical",
                             "contents": [
@@ -170,11 +171,11 @@ def handle_message(event):
                                 }
                             ]
                         }
+                    }
                 }
-            }
-            container_obj = FlexSendMessage.new_from_json_dict(reply)
-            line_bot_api.reply_message(
-                event.reply_token, messages=container_obj)
+                container_obj = FlexSendMessage.new_from_json_dict(reply)
+                line_bot_api.reply_message(
+                    event.reply_token, messages=container_obj)
         elif "明日" in message:
             json_open = requests.get(
                 'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3')
@@ -260,7 +261,7 @@ def handle_message(event):
                                     ]
                                 }
                             ]
-                        }
+                            }
                 }
             }
             container_obj = FlexSendMessage.new_from_json_dict(reply)
