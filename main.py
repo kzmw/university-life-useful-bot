@@ -139,6 +139,7 @@ def handle_message(event):
                 for num in range(41):
                     if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][0])-1 == array[num][0]:
                         imgcode = array[num][1]
+                        print(imgcode)
                         break
                 if today != today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 2:
                     temp_max = str(
@@ -150,7 +151,7 @@ def handle_message(event):
                             json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
                     reply = {
                         "type": "flex",
-                        "altText": "今日の天気" + "：" + json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
+                        "altText": "今日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weathers'][0],
                         "contents": {
                             "type": "bubble",
                             "header": {
@@ -200,7 +201,7 @@ def handle_message(event):
                                                         "contents": [
                                                             {
                                                                 "type": "text",
-                                                                "text": json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
+                                                                "text": json_load[0]['timeSeries'][0]['areas'][0]['weathers'][0],
                                                                 "align": "center"
                                                             }
                                                         ]
@@ -244,7 +245,7 @@ def handle_message(event):
                             json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
                     reply = {
                         "type": "flex",
-                        "altText": "今日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
+                        "altText": "今日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weathers'][0],
                         "contents": {
                             "type": "bubble",
                             "header": {
@@ -294,7 +295,7 @@ def handle_message(event):
                                                         "contents": [
                                                             {
                                                                 "type": "text",
-                                                                "text": json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
+                                                                "text": json_load[0]['timeSeries'][0]['areas'][0]['weathers'][0],
                                                                 "align": "center"
                                                             }
                                                         ]
