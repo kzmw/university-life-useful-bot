@@ -684,7 +684,7 @@ def handle_message(event):
                             event.reply_token, messages=container_obj)
                     elif today == today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 2:
                         for num in range(41):
-                            f int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][1])-1 == array[num][0]:
+                            if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][1])-1 == array[num][0]:
                                 imgcode = array[num][1]
                                 break
                         temp_max = "-"
