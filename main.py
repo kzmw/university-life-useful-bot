@@ -149,10 +149,6 @@ def handle_message(event):
                                             "layout": "vertical",
                                             "contents": [
                                                 {
-                                                    "type": "spacer",
-                                                    "size": "md"
-                                                },
-                                                {
                                                     "type": "text",
                                                     "text": str(json_load['daily'][0]['temp']['max']) + "℃",
                                                     "size": "xl",
