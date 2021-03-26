@@ -58,6 +58,18 @@ def handle_message(event):
         reply = "こんにちは！"
     elif message in "こんばんは":
         reply = "こんばんは！"
+    elif message in "時間割":
+        if message in "今日":
+            reply = "今日の時間割"
+        elif message in "明日":
+            reply = "明日の時間割"
+    elif message in "天気":
+        if message in "今日":
+            reply = "今日の天気"
+        elif message in "明日":
+            reply = "明日の天気"
+    elif message in "設定":
+        reply = "設定画面を開きません。"
     else:reply = message
     
     line_bot_api.reply_message(
