@@ -84,6 +84,7 @@ def handle_message(event):
             json_open = requests.get(
                 'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3')
             json_load = json_open.json()
+
             reply = {
                 "type": "flex",
                 "altText": "今日の天気" + "：" + json_load['daily'][0]['weather'][0]['description'],
@@ -153,13 +154,13 @@ def handle_message(event):
                                                 },
                                                 {
                                                     "type": "text",
-                                                    "text": json_load['daily'][0][temp]['max'] + "℃",
+                                                    "text": json_load['daily'][0]['temp']['max'] + "℃",
                                                     "size": "xl",
                                                     "color": "#ff6347"
                                                 },
                                                 {
                                                     "type": "text",
-                                                    "text": json_load['daily'][0][temp]['min'] + "℃",
+                                                    "text": json_load['daily'][0]['temp']['min'] + "℃",
                                                     "size": "xl",
                                                     "color": "#4169e1"
                                                 }
