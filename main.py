@@ -2,7 +2,8 @@ from flask import Flask, request, abort
 import os
 import json
 import requests
-import datetime
+from datetime import datetime
+from pytz import timezone
 import urllib.request 
 
 from linebot import (
@@ -19,7 +20,7 @@ from linebot.models import (
 )
 
 app = Flask(__name__)
-
+JST = timezone(timedelta(hours=+9), 'JST')
 # 環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
@@ -87,7 +88,7 @@ def handle_message(event):
                 url = 'https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json'
                 res = urllib.request.urlopen(url)
                 json_load = json.loads(res.read().decode('utf-8'))
-                today = datetime.datetime.today().strftime("%Y-%m-%d")
+                today = datetime.datetime.now(timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
                 reportDatetime = json_load[0]["reportDatetime"]
                 today_comparenum = reportDatetime.find('T')
                 today_comparetxt = reportDatetime[:today_comparenum]
