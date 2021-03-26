@@ -137,10 +137,10 @@ def handle_message(event):
                     [711, "1zJZAtN_PrQVzdUwMPSgEg0bSdnRvHrjX"]
                 ]
                 for num in range(41):
-                    if json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0] == str(array[num][0]):
+                    if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][0])-1 == array[num][0]:
                         imgcode = array[num][1]
                         break
-                if today != today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 4:
+                if today != today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 2:
                     temp_max = str(
                         json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
                     if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
@@ -151,6 +151,100 @@ def handle_message(event):
                     reply = {
                         "type": "flex",
                         "altText": "今日の天気" + "：" + json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
+                        "contents": {
+                            "type": "bubble",
+                            "header": {
+                                "type": "box",
+                                "layout": "vertical",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "今日の天気",
+                                        "color": "#FFFFFF",
+                                        "margin": "none",
+                                        "weight": "bold",
+                                        "gravity": "center",
+                                        "size": "xl"
+                                    }
+                                ],
+                                "backgroundColor": "#3cb371",
+                                "margin": "none"
+                            },
+                            "body": {
+                                "type": "box",
+                                "layout": "vertical",
+                                "contents": [
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "contents": [
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "contents": [
+                                                    {
+                                                        "type": "box",
+                                                        "layout": "vertical",
+                                                        "contents": [
+                                                            {
+                                                                "type": "image",
+                                                                "url": 'https://drive.google.com/uc?id=' + imgcode + '#dummy.png',
+                                                                "size": "md",
+                                                                "aspectRatio": "2:1"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "box",
+                                                        "layout": "vertical",
+                                                        "contents": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
+                                                                "align": "center"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": temp_max,
+                                                        "size": "xl",
+                                                        "color": "#ff6347"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "text": temp_min,
+                                                        "size": "xl",
+                                                        "color": "#4169e1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                    container_obj = FlexSendMessage.new_from_json_dict(reply)
+                    line_bot_api.reply_message(
+                        event.reply_token, messages=container_obj)
+                elif today == today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 4:
+                    temp_max = str(
+                        json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
+                    if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
+                        temp_min = "-"
+                    else:
+                        temp_min = str(
+                            json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
+                    reply = {
+                        "type": "flex",
+                        "altText": "今日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
                         "contents": {
                             "type": "bubble",
                             "header": {
