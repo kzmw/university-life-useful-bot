@@ -94,7 +94,7 @@ def handle_message(event):
                 if today != today_comparetxt:
                     reply = {
                         "type": "flex",
-                        "altText": "今日の天気" + "：" + json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'],
+                        "altText": "今日の天気" + "：" + str(json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes']),
                         "contents": {
                             "type": "bubble",
                             "header": {
@@ -144,7 +144,7 @@ def handle_message(event):
                                                         "contents": [
                                                             {
                                                                 "type": "text",
-                                                                "text": json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'],
+                                                                "text": str(json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes']),
                                                                 "align": "center"
                                                             }
                                                         ]
