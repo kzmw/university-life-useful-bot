@@ -125,7 +125,7 @@ def handle_message(event):
                                                     "contents": [
                                                         {
                                                             "type": "image",
-                                                            "url": "http://openweathermap.org/img/wn/" + json_load['daily'][0]['weather'][0]['icon'] + "@2x.png",
+                                                            "url": "http://openweathermap.org/img/wn/01d@2x.png",
                                                             "size": "md",
                                                             "aspectRatio": "2:1"
                                                         }
