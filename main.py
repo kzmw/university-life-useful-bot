@@ -32,10 +32,6 @@ DB_TABLE = "linedata"
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-@app.route("/")
-def hello_world():
-    return "hello world!"
-
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -55,9 +51,18 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    message = event.message.text
+    if message in "おはよう":
+        reply = "おはようございます！"
+    elif message in "こんにちは":
+        reply = "こんにちは！"
+    elif message in "こんばんは":
+        reply = "こんばんは！"
+    else reply = message
+    
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=reply))
 
 # Follow Event
 @handler.add(FollowEvent)
@@ -72,7 +77,7 @@ def on_follow(event):
     # メッセージの送信
     line_bot_api.reply_message(
         reply_token=reply_token,
-        messages=TextSendMessage(text=display_name + "さん、当アカウントの友達登録ありがとうございます！\n【当アカウントの利用方法について】\n「今日の時間割」と送信すると時間割設定画面で設定された時間割を返信します。")
+        messages=TextSendMessage(text=display_name + "さん、当アカウントの友達登録ありがとうございます！\n\n【当アカウントの利用方法】\n「今日の時間割」と送信すると時間割設定画面で設定された時間割を返信します。")
     )
 
 
