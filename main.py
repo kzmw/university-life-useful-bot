@@ -94,7 +94,7 @@ def handle_message(event):
                 if today != today_comparetxt:
                     reply = {
                         "type": "flex",
-                        "altText": "今日の天気" + "：" + json_load[1]['timeseries'][0]['areas'][0]['weatherCodes'],
+                        "altText": "今日の天気" + "：" + json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'],
                         "contents": {
                             "type": "bubble",
                             "header": {
@@ -144,7 +144,7 @@ def handle_message(event):
                                                         "contents": [
                                                             {
                                                                 "type": "text",
-                                                                "text": json_load[1]['timeseries'][0]['areas'][0]['weatherCodes'],
+                                                                "text": json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'],
                                                                 "align": "center"
                                                             }
                                                         ]
@@ -157,13 +157,13 @@ def handle_message(event):
                                                 "contents": [
                                                     {
                                                         "type": "text",
-                                                        "text": str(json_load[0]['timeseries'][2]['areas'][0]['temps'][1]) + "℃",
+                                                        "text": str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃",
                                                         "size": "xl",
                                                         "color": "#ff6347"
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": str(json_load[0]['timeseries'][2]['areas'][0]['temps'][0]) + "℃",
+                                                        "text": str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃",
                                                         "size": "xl",
                                                         "color": "#4169e1"
                                                     }
