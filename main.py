@@ -4,8 +4,8 @@ import os
 try:
     import MySQLdb
 except:
-    import pymysql
-    pymysql.install_as_MySQLdb()
+    import PyMySQL
+    PyMySQL.install_as_MySQLdb()
     import MySQLdb
 
 from linebot import (
