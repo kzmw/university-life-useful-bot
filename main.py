@@ -597,7 +597,7 @@ def handle_message(event):
                             json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
                         reply = {
                             "type": "flex",
-                            "altText": "明日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weathers'][2],
+                            "altText": "明日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weathers'][1],
                             "contents": {
                                 "type": "bubble",
                                 "header": {
@@ -647,7 +647,7 @@ def handle_message(event):
                                                             "contents": [
                                                                 {
                                                                     "type": "text",
-                                                                    "text": json_load[0]['timeSeries'][0]['areas'][0]['weathers'][2],
+                                                                    "text": json_load[0]['timeSeries'][0]['areas'][0]['weathers'][1],
                                                                     "align": "center"
                                                                 }
                                                             ]
