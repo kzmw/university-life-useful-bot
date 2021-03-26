@@ -72,7 +72,7 @@ def on_follow(event):
     # メッセージの送信
     line_bot_api.reply_message(
         reply_token=reply_token,
-        messages=TextSendMessage(text=display_name + "さん，ありがとう！")
+        messages=TextSendMessage(text=display_name + "さん、当アカウントの友達登録ありがとうございます！\n【当アカウントの利用方法について】\n「今日の時間割」と送信すると時間割設定画面で設定された時間割を返信します。")
     )
 
 
