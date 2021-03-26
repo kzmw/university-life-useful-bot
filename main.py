@@ -136,12 +136,12 @@ def handle_message(event):
                     [701, "17HMq1GZzw4A8A56W_P9uApK3-cbUmGRC"],
                     [711, "1zJZAtN_PrQVzdUwMPSgEg0bSdnRvHrjX"]
                 ]
-                
+
                 if today != today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 2:
                     for num in range(41):
-                    if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][1])-1 == array[num][0]:
-                        imgcode = array[num][1]
-                        break
+                        if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][1])-1 == array[num][0]:
+                            imgcode = array[num][1]
+                            break
                     temp_max = str(
                         json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
                     if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
@@ -237,9 +237,9 @@ def handle_message(event):
                         event.reply_token, messages=container_obj)
                 elif today == today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 4:
                     for num in range(41):
-                    if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][0])-1 == array[num][0]:
-                        imgcode = array[num][1]
-                        break
+                        if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][0])-1 == array[num][0]:
+                            imgcode = array[num][1]
+                            break
                     temp_max = str(
                         json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
                     if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
@@ -335,9 +335,9 @@ def handle_message(event):
                         event.reply_token, messages=container_obj)
                 elif today == today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 2:
                     for num in range(41):
-                    if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][0])-1 == array[num][0]:
-                        imgcode = array[num][1]
-                        break
+                        if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][0])-1 == array[num][0]:
+                            imgcode = array[num][1]
+                            break
                     temp_max = "-"
                     temp_min = "-"
                     reply = {
@@ -483,12 +483,12 @@ def handle_message(event):
                     [701, "17HMq1GZzw4A8A56W_P9uApK3-cbUmGRC"],
                     [711, "1zJZAtN_PrQVzdUwMPSgEg0bSdnRvHrjX"]
                 ]
-                
+
                 if today != today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 2:
                     for num in range(41):
-                    if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][2])-1 == array[num][0]:
-                        imgcode = array[num][1]
-                        break
+                        if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][2])-1 == array[num][0]:
+                            imgcode = array[num][1]
+                            break
                     temp_max = str(
                         json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
                     if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
@@ -584,9 +584,9 @@ def handle_message(event):
                         event.reply_token, messages=container_obj)
                 elif today == today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 4:
                     for num in range(41):
-                    if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][1])-1 == array[num][0]:
-                        imgcode = array[num][1]
-                        break
+                        if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][1])-1 == array[num][0]:
+                            imgcode = array[num][1]
+                            break
                     temp_max = str(
                         json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
                     if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
@@ -682,9 +682,9 @@ def handle_message(event):
                         event.reply_token, messages=container_obj)
                 elif today == today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 2:
                     for num in range(41):
-                    if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][1])-1 == array[num][0]:
-                        imgcode = array[num][1]
-                        break
+                        f int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][1])-1 == array[num][0]:
+                            imgcode = array[num][1]
+                            break
                     temp_max = "-"
                     temp_min = "-"
                     reply = {
