@@ -1,7 +1,7 @@
 from flask import Flask, request, abort
 import os
-import PyMySQL
-PyMySQL.install_as_MySQLdb()
+import pymysql
+pymysql.install_as_MySQLdb()
 import MySQLdb
 
 from linebot import (
