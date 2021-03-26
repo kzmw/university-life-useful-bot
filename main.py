@@ -1,6 +1,7 @@
 from flask import Flask, request, abort
 import os
 import json
+import requests
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -64,8 +65,8 @@ def handle_message(event):
         else:reply = "いつの時間割を返信するか送ってください！\n例：「今日の時間割」"
     elif "天気" in message:
         if "今日" in message:
-            json_open = open('http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3', 'r')
-            json_load = json.load(json_open)
+            json_open = requests.get('http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3', 'r')
+            json_load = json_open.json()
             today = json_load['daily'][0]['weather'][0]['description']
             reply = today
         elif "明日" in message:
