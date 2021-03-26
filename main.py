@@ -4,7 +4,7 @@ import json
 import requests
 from datetime import datetime
 from pytz import timezone
-import urllib.request 
+import urllib.request
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -88,17 +88,68 @@ def handle_message(event):
                 url = 'https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json'
                 res = urllib.request.urlopen(url)
                 json_load = json.loads(res.read().decode('utf-8'))
-                today = datetime.now(timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
+                today = datetime.now(timezone('Asia/Tokyo')
+                                     ).strftime("%Y-%m-%d")
                 reportDatetime = json_load[0]["reportDatetime"]
                 today_comparenum = reportDatetime.find('T')
                 today_comparetxt = reportDatetime[:today_comparenum]
+                array = [
+                    [100, "1nRV_lWsi6ECjfbNwui992aYeZZF1jqWK"],
+                    [101, "1z87Ns2IijhU7jHIW4IhFGLegsCzna3xP"],
+                    [102, "1caWIofc86avt1HvPtznBAdeLb90oDkta"],
+                    [104, "1wj2m05Rhf57mn_JrvU-mTw6v7U1iEElx"],
+                    [110, "1Z1OqRYumQihKlPZmxz67KLZmrAdq3eOs"],
+                    [112, "1dPrrUozhhv1swCCiVmRiDOzlDMV4twjS"],
+                    [115, "1sZVW6kPB91OYO_beH9Hg5P358EuDlWr8"],
+                    [200, "1ahxfgvY4Li3nMPCDLZfJosrk2RKO0-tU"],
+                    [201, "1Xr6HfglnaHaWAs6koR5l6VRJEPwYrUKr"],
+                    [202, "1xmnHajfHx1qhdTdK2CNqacEOjw9CeaV3"],
+                    [204, "16dRJzT9JfpQYZ3qUqCpfqw3qlyi6Rl0B"],
+                    [210, "1iLF6VIZPMWHy7_p2rW1QbJsYMTrvaKYW"],
+                    [212, "1uXq7tHoPMLPvTnFL_kBJoN7cbRi4Kd5w"],
+                    [215, "1kehdv3wi-bFjrRGTL2EMmvwdf9-xDf2t"],
+                    [300, "1viZY8Wjw3TG5Z4xHwmn7Vpp6Rm1HmQaE"],
+                    [301, "1M6b6AUsn7QzFjO0dukn6Yshh8OaG7S6Z"],
+                    [302, "1eVAvl3i7VXt_mZHJ2b1o0P9QwprDTjDn"],
+                    [303, "17kgTtfdOzpMu1EaKunLUQ0u3VuaiJrPp"],
+                    [308, "1AswoFT-sR3dlFBfBteX6UYMkK0ekLhuQ"],
+                    [311, "16NwFUIwPmXtEZq_yfX-mNP4cG1mfssJW"],
+                    [313, "1FEUGe6ahf2w7c_nmYxPegJPMhG2YL29f"],
+                    [314, "1SAPJzjo--HEWcgMfEppAlkCamZ0Vdp5y"],
+                    [400, "1Yi54UcqtiQj2GEUNNqaFYPsFGPDxINOP"],
+                    [401, "166qOvyRwpotiPuQWb8dpWHXSjcIT8XI7"],
+                    [402, "16SBKyYUfrWbcCUQQuolaIYLWcR-hgmpi"],
+                    [403, "1qDz_42BX-3Bmp2my0YjpFCo3ASs0TYFv"],
+                    [406, "1iNUUBTDpn-2VF0QllG2TMTrguU8uDDBx"],
+                    [411, "12y6NBqPMJCr3HKD-uiWz8xmCaz1Vs2Rl"],
+                    [413, "14j84CjGa3XZoG3kbaO-c1oHntReS0G_0"],
+                    [414, "1qll8bZGSGYwgXL9twFhh4eFxGBegsuRZ"],
+                    [500, "1336JpawiphPnVQSXBjBMHJ156G6dbUbU"],
+                    [501, "1UUt4sbCrw8Jhg4Ni0E2tv3DZcS-kg8ER"],
+                    [502, "1OGKgcN3gvBXhgknzp5YwL5fK8Gl0oQvI"],
+                    [504, "1qf4ar6z3UKfuV0M4MCfd8VtI__y8ayHQ"],
+                    [510, "1qklXyxL0dCRNAILvlyhO9J6Dg16-Bz67"],
+                    [512, "1o8xI7G1HL1MywOuljDG8xH_a3GPFHNDW"],
+                    [515, "1QuQ7ewqOBycd4rMiR-sse33ss9djJhqz"],
+                    [601, "1dvq58mXTqsTvgYbSKOQeemcP_Vzi1CyJ"],
+                    [610, "1LrKK0SKfs1MRsK8TfdjeuLLTylHFqYtl"],
+                    [701, "17HMq1GZzw4A8A56W_P9uApK3-cbUmGRC"],
+                    [711, "1zJZAtN_PrQVzdUwMPSgEg0bSdnRvHrjX"]
+                ]
+                for num in range(41):
+                    if (json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0] == array[num][0]):
+                        imgcode = array[num][1]
+                        break
                 print(today)
                 print(today_comparetxt)
-                if today != today_comparetxt:
-                    temp_max = str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
+                if today != today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 4:
+                    temp_max = str(
+                        json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
                     if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
                         temp_min = "-"
-                    else:temp_min = str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
+                    else:
+                        temp_min = str(
+                            json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
                     reply = {
                         "type": "flex",
                         "altText": "今日の天気" + "：" + json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
@@ -139,7 +190,7 @@ def handle_message(event):
                                                         "contents": [
                                                             {
                                                                 "type": "image",
-                                                                "url": "https://www.javadrive.jp/img/logo_small_c.png",
+                                                                "url": 'https://drive.google.com/uc?id=' + imgcode + '#dummy.png',
                                                                 "size": "md",
                                                                 "aspectRatio": "2:1"
                                                             }
@@ -274,7 +325,7 @@ def handle_message(event):
                                     ]
                                 }
                             ]
-                        }
+                            }
                 }
             }
             container_obj = FlexSendMessage.new_from_json_dict(reply)
