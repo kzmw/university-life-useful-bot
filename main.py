@@ -3,7 +3,7 @@ import os
 import json
 import requests
 import datetime
-import urllib.request
+import urllib.request 
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -91,10 +91,11 @@ def handle_message(event):
                 reportDatetime = json_load[1]["reportDatetime"]
                 today_comparenum = reportDatetime.find('-')
                 today_comparetxt = reportDatetime[:today_comparenum]
+                print(today_comparetxt)
                 if today != today_comparetxt:
                     reply = {
                         "type": "flex",
-                        "altText": "今日の天気" + "：" + str(json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes']),
+                        "altText": "今日の天気" + "：" + json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
                         "contents": {
                             "type": "bubble",
                             "header": {
@@ -144,7 +145,7 @@ def handle_message(event):
                                                         "contents": [
                                                             {
                                                                 "type": "text",
-                                                                "text": str(json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes']),
+                                                                "text": json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
                                                                 "align": "center"
                                                             }
                                                         ]
