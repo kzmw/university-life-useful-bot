@@ -490,12 +490,12 @@ def handle_message(event):
                                 imgcode = array[num][1]
                                 break
                         temp_max = str(
-                        json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
-                        if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
+                        json_load[0]['timeSeries'][2]['areas'][0]['temps'][3]) + "℃"
+                        if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][3]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][2]):
                             temp_min = "-"
                         else:
                             temp_min = str(
-                            json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
+                            json_load[0]['timeSeries'][2]['areas'][0]['temps'][2]) + "℃"
                         reply = {
                             "type": "flex",
                             "altText": "明日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weathers'][2],
@@ -589,12 +589,12 @@ def handle_message(event):
                                 imgcode = array[num][1]
                                 break
                         temp_max = str(
-                        json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
-                        if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
+                        json_load[0]['timeSeries'][2]['areas'][0]['temps'][3]) + "℃"
+                        if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][3]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][2]):
                             temp_min = "-"
                         else:
                             temp_min = str(
-                            json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
+                            json_load[0]['timeSeries'][2]['areas'][0]['temps'][2]) + "℃"
                         reply = {
                             "type": "flex",
                             "altText": "明日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weathers'][1],
@@ -687,8 +687,10 @@ def handle_message(event):
                             if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][1])-1 == array[num][0]:
                                 imgcode = array[num][1]
                                 break
-                        temp_max = "-"
-                        temp_min = "-"
+                        temp_max = str(
+                            json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
+                        temp_min = str(
+                            json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
                         reply = {
                             "type": "flex",
                             "altText": "明日の天気" + "：" + json_load[0]['timeSeries'][0]['areas'][0]['weathers'][2],
