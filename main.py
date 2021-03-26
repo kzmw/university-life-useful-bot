@@ -776,10 +776,10 @@ def handle_message(event):
                             reply)
                         line_bot_api.reply_message(
                             event.reply_token, messages=container_obj)
-            except urllib.error.HTTPError as e:
-                print('HTTPError: ', e)
-            except json.JSONDecodeError as e:
-                print('JSONDecodeError: ', e)
+                except urllib.error.HTTPError as e:
+                    print('HTTPError: ', e)
+                except json.JSONDecodeError as e:
+                    print('JSONDecodeError: ', e)
         else:
             reply = "いつの天気を返信するか送ってください！\n例：「今日の天気」"
             line_bot_api.reply_message(
