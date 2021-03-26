@@ -2,6 +2,7 @@ from flask import Flask, request, abort
 import os
 import json
 import requests
+import datetime
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -81,13 +82,16 @@ def handle_message(event):
                 event.reply_token, TextSendMessage(text=reply))
     elif "天気" in message:
         if "今日" in message:
-            json_open = requests.get(
-                'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3')
-            json_load = json_open.json()
-
+            json_open = open('https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json', 'r')
+            json_load = json.load(json_open)
+            today = datetime.datetime.today().strftime("%Y-%m-%d")
+            reportDatetime = json_load[1]["reportDatetime"]
+            today_comparenum = reportDatetime.find('-')
+            today_comparetxt = reportDatetime[:today_comparenum]
+            if today != today_comparetxt:
             reply = {
                 "type": "flex",
-                "altText": "今日の天気" + "：" + json_load['daily'][0]['weather'][0]['description'],
+                "altText": "今日の天気" + "：" + json_load[1]['timeseries'][0]['areas'][0]['weatherCodes'],
                 "contents": {
                     "type": "bubble",
                         "header": {
@@ -125,7 +129,7 @@ def handle_message(event):
                                                     "contents": [
                                                         {
                                                             "type": "image",
-                                                            "url": "https://openweathermap.org/img/wn/" + json_load['daily'][0]['weather'][0]['icon'] + "@2x.png",
+                                                            "url": "https://www.javadrive.jp/img/logo_small_c.png",
                                                             "size": "md",
                                                             "aspectRatio": "2:1"
                                                         }
@@ -137,7 +141,7 @@ def handle_message(event):
                                                     "contents": [
                                                         {
                                                             "type": "text",
-                                                            "text": json_load['daily'][0]['weather'][0]['description'],
+                                                            "text": json_load[1]['timeseries'][0]['areas'][0]['weatherCodes'],
                                                             "align": "center"
                                                         }
                                                     ]
@@ -150,13 +154,13 @@ def handle_message(event):
                                             "contents": [
                                                 {
                                                     "type": "text",
-                                                    "text": str(json_load['daily'][0]['temp']['max']) + "℃",
+                                                    "text": str(json_load[0]['timeseries'][2]['areas'][0]['temps'][1]) + "℃",
                                                     "size": "xl",
                                                     "color": "#ff6347"
                                                 },
                                                 {
                                                     "type": "text",
-                                                    "text": str(json_load['daily'][0]['temp']['min']) + "℃",
+                                                    "text": str(json_load[0]['timeseries'][2]['areas'][0]['temps'][0]) + "℃",
                                                     "size": "xl",
                                                     "color": "#4169e1"
                                                 }
