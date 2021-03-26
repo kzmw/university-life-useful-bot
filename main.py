@@ -154,13 +154,13 @@ def handle_message(event):
                                                 },
                                                 {
                                                     "type": "text",
-                                                    "text": json_load['daily'][0]['temp']['max'] + "℃",
+                                                    "text": str(json_load['daily'][0]['temp']['max']) + "℃",
                                                     "size": "xl",
                                                     "color": "#ff6347"
                                                 },
                                                 {
                                                     "type": "text",
-                                                    "text": json_load['daily'][0]['temp']['min'] + "℃",
+                                                    "text": str(json_load['daily'][0]['temp']['min']) + "℃",
                                                     "size": "xl",
                                                     "color": "#4169e1"
                                                 }
