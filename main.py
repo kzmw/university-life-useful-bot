@@ -58,7 +58,7 @@ def handle_message(event):
         reply = "こんにちは！"
     elif message in "こんばんは":
         reply = "こんばんは！"
-    else reply = message
+    else:reply = message
     
     line_bot_api.reply_message(
         event.reply_token,
