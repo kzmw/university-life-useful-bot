@@ -88,11 +88,16 @@ def handle_message(event):
                 res = urllib.request.urlopen(url)
                 json_load = json.loads(res.read().decode('utf-8'))
                 today = datetime.datetime.today().strftime("%Y-%m-%d")
-                reportDatetime = json_load[1]["reportDatetime"]
+                reportDatetime = json_load[0]["reportDatetime"]
                 today_comparenum = reportDatetime.find('T')
                 today_comparetxt = reportDatetime[:today_comparenum]
+                print(today)
                 print(today_comparetxt)
                 if today != today_comparetxt:
+                    temp_max = str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
+                    if str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) == str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]):
+                        temp_min = "-"
+                    else:temp_min = str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃"
                     reply = {
                         "type": "flex",
                         "altText": "今日の天気" + "：" + json_load[1]['timeSeries'][0]['areas'][0]['weatherCodes'][0],
@@ -158,13 +163,13 @@ def handle_message(event):
                                                 "contents": [
                                                     {
                                                         "type": "text",
-                                                        "text": str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃",
+                                                        "text": temp_max",
                                                         "size": "xl",
                                                         "color": "#ff6347"
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": str(json_load[0]['timeSeries'][2]['areas'][0]['temps'][0]) + "℃",
+                                                        "text": temp_min,
                                                         "size": "xl",
                                                         "color": "#4169e1"
                                                     }
