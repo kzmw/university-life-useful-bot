@@ -14,7 +14,7 @@ from linebot.models import (
     FollowEvent, UnfollowEvent, MessageEvent, PostbackEvent,
     TextMessage, TextSendMessage, TemplateSendMessage,
     ButtonsTemplate, CarouselTemplate, CarouselColumn,
-    PostbackTemplateAction
+    PostbackTemplateActiond
 )
 
 app = Flask(__name__)
@@ -69,29 +69,10 @@ def on_follow(event):
     picture_url = profiles.picture_url
     status_message = profiles.status_message
 
-    # DBへの保存
-    try:
-        conn = MySQLdb.connect(user=DB_USERNAME, passwd=DB_PASSWORD, host=DB_HOSTNAME, db=DB_NAME)
-        c = conn.cursor()
-        sql = "SELECT `id` FROM`"+DB_TABLE+"` WHERE `user_id` = '"+user_id+"';"
-        c.execute(sql)
-        ret = c.fetchall()
-        if len(ret) == 0:
-            sql = "INSERT INTO `"+DB_TABLE+"` (`user_id`, `display_name`, `picture_url`, `status_message`, `status`)\
-              VALUES ('"+user_id+"', '"+str(display_name)+"', '"+str(picture_url)+"', '"+str(status_message)+"', 1);"
-        elif len(ret) == 1:
-            sql = "UPDATE `"+DB_TABLE+"` SET `display_name` = '"+str(display_name)+"', `picture_url` = '"+str(picture_url)+"',\
-            `status_message` = '"+str(status_message)+"', `status` = '1' WHERE `user_id` = '"+user_id+"';"
-        c.execute(sql)
-        conn.commit()
-    finally:
-        conn.close()
-        c.close()
-
     # メッセージの送信
     line_bot_api.reply_message(
         reply_token=reply_token,
-        messages=TextSendMessage(text='メッセージArigato!\nです')
+        messages=TextSendMessage(text=display_name + "さん，ありがとう！")
     )
 
 
