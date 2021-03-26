@@ -1,8 +1,6 @@
 from flask import Flask, request, abort
 import os
-import pymysql
-pymysql.install_as_MySQLdb()
-import MySQLdb
+import json
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -14,7 +12,7 @@ from linebot.models import (
     FollowEvent, UnfollowEvent, MessageEvent, PostbackEvent,
     TextMessage, TextSendMessage, TemplateSendMessage,
     ButtonsTemplate, CarouselTemplate, CarouselColumn,
-    PostbackTemplateAction
+    PostbackTemplateAction, FlexSendMessage
 )
 
 app = Flask(__name__)
@@ -63,11 +61,17 @@ def handle_message(event):
             reply = "今日の時間割"
         elif "明日" in message:
             reply = "明日の時間割"
+        else:reply = "いつの時間割を返信するか送ってください！\n例：「今日の時間割」"
     elif "天気" in message:
         if "今日" in message:
-            reply = "今日の天気"
+            json_open = open('http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3', 'r')
+            json_load = json.load(json_open)
+            today = json_load['daily'][0]['weather'][0]['description']
+            reply = today
         elif "明日" in message:
             reply = "明日の天気"
+    elif "運行情報" in message:
+
     elif "設定" in message:
         reply = "設定画面を開きません。"
     else:reply = message
