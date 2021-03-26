@@ -175,10 +175,93 @@ def handle_message(event):
             json_open = requests.get(
                 'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3')
             json_load = json_open.json()
-            tdat = json_load['daily'][1]['weather'][0]['description']
-            reply = tdat
+
+            reply = {
+                "type": "flex",
+                "altText": "明日の天気" + "：" + json_load['daily'][1]['weather'][0]['description'],
+                "contents": {
+                    "type": "bubble",
+                        "header": {
+                            "type": "box",
+                            "layout": "vertical",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "明日の天気",
+                                    "color": "#FFFFFF",
+                                    "margin": "none",
+                                    "weight": "bold",
+                                    "gravity": "center",
+                                    "size": "xl"
+                                }
+                            ],
+                            "backgroundColor": "#3cb371",
+                            "margin": "none"
+                        },
+                    "body": {
+                            "type": "box",
+                            "layout": "vertical",
+                            "contents": [
+                                {
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "contents": [
+                                        {
+                                            "type": "box",
+                                            "layout": "vertical",
+                                            "contents": [
+                                                {
+                                                    "type": "box",
+                                                    "layout": "vertical",
+                                                    "contents": [
+                                                        {
+                                                            "type": "image",
+                                                            "url": "https://openweathermap.org/img/wn/" + json_load['daily'][1]['weather'][0]['icon'] + "@2x.png",
+                                                            "size": "md",
+                                                            "aspectRatio": "2:1"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "box",
+                                                    "layout": "vertical",
+                                                    "contents": [
+                                                        {
+                                                            "type": "text",
+                                                            "text": json_load['daily'][1]['weather'][0]['description'],
+                                                            "align": "center"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "box",
+                                            "layout": "vertical",
+                                            "contents": [
+                                                {
+                                                    "type": "text",
+                                                    "text": str(json_load['daily'][1]['temp']['max']) + "℃",
+                                                    "size": "xl",
+                                                    "color": "#ff6347"
+                                                },
+                                                {
+                                                    "type": "text",
+                                                    "text": str(json_load['daily'][1]['temp']['min']) + "℃",
+                                                    "size": "xl",
+                                                    "color": "#4169e1"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                }
+            }
+            container_obj = FlexSendMessage.new_from_json_dict(reply)
             line_bot_api.reply_message(
-                event.reply_token, TextSendMessage(text=reply))
+                event.reply_token, messages=container_obj)
         else:
             reply = "いつの天気を返信するか送ってください！\n例：「今日の天気」"
             line_bot_api.reply_message(
