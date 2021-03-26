@@ -52,23 +52,23 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = event.message.text
-    if message in "おはよう":
+    if "おはよう" in message:
         reply = "おはようございます！"
-    elif message in "こんにちは":
+    elif "こんにちは" in message:
         reply = "こんにちは！"
-    elif message in "こんばんは":
+    elif "こんばんは" in message:
         reply = "こんばんは！"
-    elif message in "時間割":
-        if message in "今日":
+    elif "時間割" in message:
+        if "今日" in message:
             reply = "今日の時間割"
-        elif message in "明日":
+        elif "明日" in message:
             reply = "明日の時間割"
-    elif message in "天気":
-        if message in "今日":
+    elif "天気" in message:
+        if "今日" in message:
             reply = "今日の天気"
-        elif message in "明日":
+        elif "明日" in message:
             reply = "明日の天気"
-    elif message in "設定":
+    elif "設定" in message:
         reply = "設定画面を開きません。"
     else:reply = message
     
