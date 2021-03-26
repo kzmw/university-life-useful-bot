@@ -71,7 +71,7 @@ def handle_message(event):
         elif "明日" in message:
             reply = "明日の天気"
     elif "運行情報" in message:
-
+        reply = "明日の天気"
     elif "設定" in message:
         reply = "設定画面を開きません。"
     else:reply = message
