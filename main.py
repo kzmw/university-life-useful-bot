@@ -172,9 +172,9 @@ def handle_message(event):
                     }
                 }
             }
-        container_obj = FlexSendMessage.new_from_json_dict(reply)
-        line_bot_api.reply_message(
-            event.reply_token, messages=container_obj)
+            container_obj = FlexSendMessage.new_from_json_dict(reply)
+            line_bot_api.reply_message(
+                event.reply_token, messages=container_obj)
         elif "明日" in message:
             json_open = requests.get(
                 'http://api.openweathermap.org/data/2.5/onecall?lat=34.440051&lon=135.373055&lang=ja&units=metric&exclude={current,minutely,hourly,alerts}&appid=87224c26fda90becf7d1a263ced5a5b3')
