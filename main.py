@@ -487,7 +487,7 @@ def handle_message(event):
                     if today != today_comparetxt and len(json_load[0]['timeSeries'][2]['areas'][0]['temps']) == 2:
                         for num in range(41):
                             if int(json_load[0]['timeSeries'][0]['areas'][0]['weatherCodes'][2])-1 == array[num][0]:
-                              imgcode = array[num][1]
+                                imgcode = array[num][1]
                                 break
                         temp_max = str(
                         json_load[0]['timeSeries'][2]['areas'][0]['temps'][1]) + "℃"
