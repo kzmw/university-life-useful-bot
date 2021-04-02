@@ -796,6 +796,11 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=reply))
+    elif "help" in message or "Help" in message or "HELP" in message or "ヘルプ" in message or "使い方" in message or "わからない" in message:
+        reply = "【使用方法】\n・時間割\n「今日の時間割」または「明日の時間割」と送信すると，設定ページで設定された時間割が表示されます。\n・天気「今日の天気」または「明日の天気」と送信すると，設定ページで設定された大学最寄り駅がある都道府県の時間割が表示されます。\n・運行情報\n「運行情報」と送信すると，設定ページで設定された路線(最大4路線)の運行情報を表示します。\n・設定\n「設定」と送信すると，設定ページのURLが表示されます(仮)。"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=reply))
     else:
         reply = message
         line_bot_api.reply_message(
