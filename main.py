@@ -25,7 +25,7 @@ from linebot.models import (
     UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
     FlexSendMessage, BubbleContainer, ImageComponent, BoxComponent,
     TextComponent, IconComponent, ButtonComponent,
-    SeparatorComponent, QuickReply, QuickReplyButton，RichMenu, RichMenuArea, RichMenuBounds, RichMenuSiz，
+    SeparatorComponent, QuickReply, QuickReplyButton, RichMenu, RichMenuArea, RichMenuBounds, RichMenuSiz，
 )
 
 app = Flask(__name__)
