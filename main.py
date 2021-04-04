@@ -5,10 +5,8 @@ import requests
 from datetime import datetime
 from pytz import timezone
 import urllib.request
-from django.urls import reverse, path 
 from urllib.parse import urlencode
 import random, string
-from django.contrib.sites.models import Site
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -49,10 +47,7 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 @app.route("/")
 def login():
-    domain = Site.objects.get_current().domain
-    obj = MyModel.objects.get(id=3)
-    path = obj.get_absolute_url()
-    qs = urllib.parse.urlparse(path).query
+    qs=''
     if qs == '':
         statenumber = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
         return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/&state=" + statenumber + "&scope=profile%20openid")
