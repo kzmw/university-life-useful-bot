@@ -49,7 +49,7 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 @app.route("/")
 def login():
-    qs = urllib.parse.urlparse(browser.current_url).query
+    qs = urllib.parse.urlparse(request._current_scheme_host).query
     if qs == '':
         statenumber = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
         return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/&state=" + statenumber + "&scope=profile%20openid")
