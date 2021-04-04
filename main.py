@@ -48,7 +48,7 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 @app.route("/")
-def login():
+def login(request):
     qs = urllib.parse.urlparse(request.build_absolute_uri()).query
     if qs == '':
         statenumber = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
