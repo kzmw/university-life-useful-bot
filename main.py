@@ -8,7 +8,7 @@ import urllib.request
 from django.urls import reverse, path 
 from urllib.parse import urlencode
 import random, string
-from Django.contrib.sites.models import Site
+from django.contrib.sites.models import Site
 
 from linebot import (
     LineBotApi, WebhookHandler
