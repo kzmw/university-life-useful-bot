@@ -43,6 +43,9 @@ DB_TABLE = "linedata"
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
+@app.route("/")
+def login():
+    return render_template("index.html")
 
 @app.route("/callback", methods=['POST'])
 def callback():
