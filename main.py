@@ -8,6 +8,7 @@ import urllib.request
 from django.urls import reverse
 from urllib.parse import urlencode
 import random, string
+from selenium import webdriver
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -48,8 +49,18 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 @app.route("/")
 def login():
-    statenumber = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
-    return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.github.io/&state=" + statenumber + "&scope=profile%20openid")
+    qs = urllib.parse.urlparse(driver.current_url).query
+    if qs == '':
+        statenumber = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
+        return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/&state=" + statenumber + "&scope=profile%20openid")
+    else:
+        qs_list = urllib.parse.parse_qsl(qs)
+        for i in qs_list:
+            if qs_list[i][0] == "code":
+                code = qs_list[i][0]
+            elif qs_list[i][0] == "state":
+                state = qs_list[i][0]
+        print (code + "," + state)
 
 @app.route("/callback", methods=['POST'])
 def callback():
