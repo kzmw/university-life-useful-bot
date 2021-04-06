@@ -45,20 +45,14 @@ DB_TABLE = "linedata"
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-@app.route("/")
+@app.route("/login")
 def login():
-    qs=''
-    if qs == '':
         statenumber = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
-        return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/&state=" + statenumber + "&scope=profile%20openid")
-    else:
-        qs_list = urllib.parse.parse_qsl(qs)
-        for i in qs_list:
-            if qs_list[i][0] == "code":
-                code = qs_list[i][0]
-            elif qs_list[i][0] == "state":
-                state = qs_list[i][0]
-        print (code + "," + state)
+        return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/post&state=" + statenumber + "&scope=profile%20openid")
+
+@app.route("/post?code=<code>&state=<state>")
+def post(code=None):
+        return code
 
 @app.route("/callback", methods=['POST'])
 def callback():
