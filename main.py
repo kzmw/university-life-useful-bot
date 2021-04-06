@@ -58,7 +58,7 @@ def post():
         if response.status_code == 200:
             response_json = response.json()
             id_token = response_json["id_token"]
-            response2 = requests.post('https://api.line.me/oauth2/v2.1/token', data={'id_token':id_token,'client_id':'1655825338'})
+            response2 = requests.post('https://api.line.me/oauth2/v2.1/verify', data={'id_token':id_token,'client_id':'1655825338'})
             if response2.status_code == 200:
                 response2_json = response2.json()
                 return response2_json["sub"]
