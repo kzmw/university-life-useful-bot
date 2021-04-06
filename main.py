@@ -78,6 +78,7 @@ def post():
                 rows = json.dumps(cur.fetchall())
                 cur.close()
                 conn.close()
+                redirect("https://university-life-useful-bot.herokuapp.com/edit")
                 return response2_json["sub"] + "<br>" + response2_json["name"] + '<br>' + rows + '>'
             else:
                 return 'エラー'
