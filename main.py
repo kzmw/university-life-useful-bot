@@ -78,7 +78,7 @@ def post():
                 rows = json.dumps(cur.fetchall())
                 cur.close()
                 conn.close()
-                redirect("https://university-life-useful-bot.herokuapp.com/edit")
+                return redirect("https://university-life-useful-bot.herokuapp.com/edit")
             else:
                 return 'エラー'
         else:
