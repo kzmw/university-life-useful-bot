@@ -58,7 +58,7 @@ def post():
         response = requests.post('https://api.line.me/oauth2/v2.1/token', data={'grant_type':'authorization_code','code':code,'redirect_uri':'https://university-life-useful-bot.herokuapp.com/post','client_id':'1655825338','client_secret':'23252a4f6b865a32a80427f71e89fe53'})
         print(response.status_code)
         if response.status_code == 200:
-            return 200
+            return '200'
         else:
             return "エラーらしいよ"
 @app.route("/callback", methods=['POST'])
