@@ -55,7 +55,7 @@ def login():
 def post():
         code = request.args.get('code', '')
         state = request.args.get('state', '')
-        response = requests.post('https://api.line.me/oauth2/v2.1/token',json.dumps({'grant_type':'authorization_code','code':code,'redirect_uri':'https://university-life-useful-bot.herokuapp.com/post','client_id':'1655825338','client_secret':'23252a4f6b865a32a80427f71e89fe53'}),headers={'Content-Type': 'application/x-www-form-urlencoded'})
+        response = requests.post('https://api.line.me/oauth2/v2.1/token',json.dumps({'grant_type':'authorization_code','code':code,'redirect_uri':'https://university-life-useful-bot.herokuapp.com/post','client_id':1655825338,'client_secret':'23252a4f6b865a32a80427f71e89fe53'}),headers={'Content-Type': 'application/x-www-form-urlencoded'})
         pprint.pprint(response.json())
         return response
 
