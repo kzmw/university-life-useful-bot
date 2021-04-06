@@ -79,11 +79,15 @@ def post():
                 cur.close()
                 conn.close()
                 redirect("https://university-life-useful-bot.herokuapp.com/edit")
-                return response2_json["sub"] + "<br>" + response2_json["name"] + '<br>' + rows + '>'
             else:
                 return 'エラー'
         else:
             return 'エラー'
+
+@app.route("/edit")
+def edit():
+    return "編集ページへようこそ"
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
