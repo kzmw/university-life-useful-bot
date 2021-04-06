@@ -80,6 +80,9 @@ def post():
                 cur.close()
                 conn.close()
                 session["flag"] = True
+                session["uid"] = response2_json["sub"]
+                session["name"] = response2_json["name"]
+                session["picture"] = response2_json["picture"]
                 return redirect("https://university-life-useful-bot.herokuapp.com/edit")
             else:
                 return 'エラー'
@@ -89,7 +92,7 @@ def post():
 @app.route("/edit")
 def edit():
     if "flag" in session and session["flag"]:
-        return "編集ページへようこそ"
+        return session["name"] + "さん、編集ページへようこそ！"
     else:
         return "かえれ！！！！！！"
 
