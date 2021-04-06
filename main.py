@@ -1,4 +1,4 @@
-from flask import Flask, request, abort, render_template, redirect
+from flask import Flask, request, abort, render_template, redirect, session
 import os
 import json
 import requests
@@ -33,6 +33,7 @@ from linebot.models import (
 )
 
 app = Flask(__name__)
+app.secret_key = "zVoYisWmTe"
 
 # 環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -78,6 +79,7 @@ def post():
                 rows = json.dumps(cur.fetchall())
                 cur.close()
                 conn.close()
+                session["flag"] = True
                 return redirect("https://university-life-useful-bot.herokuapp.com/edit")
             else:
                 return 'エラー'
@@ -86,7 +88,10 @@ def post():
 
 @app.route("/edit")
 def edit():
-    return "編集ページへようこそ"
+    if "flag" in session and session["flag"]:
+        return "編集ページへようこそ"
+    else:
+        return "かえれ！！！！！！"
 
 
 @app.route("/callback", methods=['POST'])
