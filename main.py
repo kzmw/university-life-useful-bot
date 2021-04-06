@@ -75,7 +75,7 @@ def post():
                 cur = conn.cursor()
                 sql_sentence = "select count(*) from " + DB_TABLE + ";"
                 cur.execute(sql_sentence)
-                rows = json.dumps((cur.fetchall())
+                rows = json.dumps(cur.fetchall())
                 cur.close()
                 conn.close()
                 return response2_json["sub"] + "<br>" + response2_json["name"] + '<br>' + rows + '>'
