@@ -55,11 +55,17 @@ def post():
         code = request.args.get('code', '')
         state = request.args.get('state', '')
         response = requests.post('https://api.line.me/oauth2/v2.1/token', data={'grant_type':'authorization_code','code':code,'redirect_uri':'https://university-life-useful-bot.herokuapp.com/post','client_id':'1655825338','client_secret':'23252a4f6b865a32a80427f71e89fe53'})
-        print(response.status_code)
         if response.status_code == 200:
-            return response.json()
+            response_json = response.json()
+            id_token = response_json["id_token"]
+            response2 = requests.post('https://api.line.me/oauth2/v2.1/token', data={'id_token':id_token,'client_id':'1655825338'})
+            if response2.status_code == 200:
+                response2_json = response2.json()
+                return response2_json["sub"]
+            else:
+                return '2つ目でエラーらしいよ'
         else:
-            return 'エラーらしいよ'
+            return '1つ目でエラーらしいよ'
 
 @app.route("/callback", methods=['POST'])
 def callback():
