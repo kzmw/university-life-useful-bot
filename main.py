@@ -50,9 +50,10 @@ def login():
         statenumber = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
         return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/post&state=" + statenumber + "&scope=profile%20openid")
 
-@app.route("/post?code=<code>&state=<state>")
-def post(code=None):
-        return code
+@app.route("/post")
+def post():
+        contents = request.args.get('code', '')
+        return contents
 
 @app.route("/callback", methods=['POST'])
 def callback():
