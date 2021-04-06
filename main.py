@@ -8,6 +8,7 @@ import urllib.request
 from urllib.parse import urlencode
 import random, string
 import pprint
+import psycopg2
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -61,11 +62,27 @@ def post():
             response2 = requests.post('https://api.line.me/oauth2/v2.1/verify', data={'id_token':id_token,'client_id':'1655825338'})
             if response2.status_code == 200:
                 response2_json = response2.json()
-                return response2_json["sub"] + "<br>" + response2_json["name"] + '<br><img src="' + response2_json["picture"] + '">'
+                conn = psycopg2.connect("postgresql://"
+                        + DB_USERNAME
+                        + ":" 
+                        + DB_PASSWORD
+                        + "@"
+                        + DB_HOSTNAME
+                        + ":"
+                        + "5432"
+                        + "/" 
+                        + DB_NAME)
+                cur = conn.cursor()
+                sql_sentence = "select count(*) from " + DB_TABLE + ";"
+                cur.execute(sql_sentence)
+                rows = cur.fetchall()
+                cur.close()
+                conn.close()
+                return response2_json["sub"] + "<br>" + response2_json["name"] + '<br>' + rows + '>'
             else:
-                return '2つ目でエラーらしいよ'
+                return 'エラー'
         else:
-            return '1つ目でエラーらしいよ'
+            return 'エラー'
 
 @app.route("/callback", methods=['POST'])
 def callback():
