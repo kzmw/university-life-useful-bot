@@ -40,8 +40,7 @@ DB_USERNAME = os.environ["DB_USERNAME"]
 DB_PASSWORD = os.environ["DB_PASSWORD"]
 DB_HOSTNAME = os.environ["DB_HOSTNAME"]
 DB_NAME = os.environ["DB_NAME"]
-
-DB_TABLE = "linedata"
+DB_TABLE = "line_data"
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
@@ -58,9 +57,10 @@ def post():
         response = requests.post('https://api.line.me/oauth2/v2.1/token', data={'grant_type':'authorization_code','code':code,'redirect_uri':'https://university-life-useful-bot.herokuapp.com/post','client_id':'1655825338','client_secret':'23252a4f6b865a32a80427f71e89fe53'})
         print(response.status_code)
         if response.status_code == 200:
-            return '200'
+            return json.dumps(response)
         else:
-            return "エラーらしいよ"
+            return 'エラーらしいよ'
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
