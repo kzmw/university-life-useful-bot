@@ -50,7 +50,7 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 @app.route("/login")
 def login():
         statenumber = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
-        return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/post&state=" + statenumber + "&scope=profile%20openid")
+        return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/post&state=" + statenumber + "&scope=profile%20openid&disable_ios_auto_login=true")
 
 @app.route("/post")
 def post():
