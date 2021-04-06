@@ -7,6 +7,7 @@ from pytz import timezone
 import urllib.request
 from urllib.parse import urlencode
 import random, string
+import pprint
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -52,8 +53,11 @@ def login():
 
 @app.route("/post")
 def post():
-        contents = request.args.get('code', '')
-        return contents
+        code = request.args.get('code', '')
+        state = request.args.get('state', '')
+        response = requests.post('http://127.0.0.1:5000/post',json.dumps({'grant_type':'authorization_code','code':code,'redirect_uri':'https://university-life-useful-bot.herokuapp.com/post','client_id':'1655825338','client_secret':'23252a4f6b865a32a80427f71e89fe53'}),headers={'Content-Type': 'application/x-www-form-urlencoded'})
+        pprint.pprint(response.json())
+        return response
 
 @app.route("/callback", methods=['POST'])
 def callback():
