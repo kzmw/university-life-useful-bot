@@ -84,7 +84,7 @@ def post():
 @app.route("/edit")
 def edit():
     if "flag" in session and session["flag"]:
-        return render_template("name.html")
+        return render_template("edit.html")
     else:
         return "かえれ！！！！！！"
 
