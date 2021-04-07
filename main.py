@@ -68,8 +68,6 @@ def post():
             response2 = requests.post('https://api.line.me/oauth2/v2.1/verify', data={'id_token': id_token, 'client_id': '1655825338'})
             if response2.status_code == 200:
                 response2_json = response2.json()
-                cur.close()
-                conn.close()
                 session["flag"] = True
                 session["uid"] = response2_json["sub"]
                 session["name"] = response2_json["name"]
