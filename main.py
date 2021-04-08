@@ -97,7 +97,7 @@ def edit():
                 result = []
                 for s in r:
                     result.append(s) 
-                return render_template("edit.html",result = user_data)
+                return render_template("edit.html",user_data = result)
                 break
         else:
             return "あなたのデータが登録されてないみたい"
