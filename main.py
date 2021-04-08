@@ -90,8 +90,8 @@ def edit():
                                " password=" + DB_PASSWORD)
         sql = 'select * from ' + DB_TABLE
         with con.cursor() as cur:
-        cur.execute(sql)
-        rows = cur.fetchall()
+            cur.execute(sql)
+            rows = cur.fetchall()
         for r in rows:
             print(r[0])
         return render_template("edit.html")
