@@ -51,37 +51,49 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 @app.route("/login")
 def login():
-        statenumber = ''.join(
-            [random.choice(string.ascii_letters + string.digits) for i in range(10)])
-        return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/post&state=" + statenumber + "&scope=profile%20openid&disable_ios_auto_login=true")
+    statenumber = ''.join(
+        [random.choice(string.ascii_letters + string.digits) for i in range(10)])
+    return redirect("https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655825338&redirect_uri=https://university-life-useful-bot.herokuapp.com/post&state=" + statenumber + "&scope=profile%20openid&disable_ios_auto_login=true")
 
 
 @app.route("/post")
 def post():
-        code = request.args.get('code', '')
-        state = request.args.get('state', '')
-        response = requests.post('https://api.line.me/oauth2/v2.1/token', data={'grant_type': 'authorization_code', 'code': code,
-                                 'redirect_uri': 'https://university-life-useful-bot.herokuapp.com/post', 'client_id': '1655825338', 'client_secret': '23252a4f6b865a32a80427f71e89fe53'})
-        if response.status_code == 200:
-            response_json = response.json()
-            id_token = response_json["id_token"]
-            response2 = requests.post('https://api.line.me/oauth2/v2.1/verify', data={'id_token': id_token, 'client_id': '1655825338'})
-            if response2.status_code == 200:
-                response2_json = response2.json()
-                session["flag"] = True
-                session["uid"] = response2_json["sub"]
-                session["name"] = response2_json["name"]
-                session["picture"] = response2_json["picture"]
-                return redirect("https://university-life-useful-bot.herokuapp.com/edit")
-            else:
-                return 'エラー'
+    code = request.args.get('code', '')
+    state = request.args.get('state', '')
+    response = requests.post('https://api.line.me/oauth2/v2.1/token', data={'grant_type': 'authorization_code', 'code': code,
+                             'redirect_uri': 'https://university-life-useful-bot.herokuapp.com/post', 'client_id': '1655825338', 'client_secret': '23252a4f6b865a32a80427f71e89fe53'})
+    if response.status_code == 200:
+        response_json = response.json()
+        id_token = response_json["id_token"]
+        response2 = requests.post('https://api.line.me/oauth2/v2.1/verify', data={
+                                  'id_token': id_token, 'client_id': '1655825338'})
+        if response2.status_code == 200:
+            response2_json = response2.json()
+            session["flag"] = True
+            session["uid"] = response2_json["sub"]
+            session["name"] = response2_json["name"]
+            session["picture"] = response2_json["picture"]
+            return redirect("https://university-life-useful-bot.herokuapp.com/edit")
         else:
             return 'エラー'
+    else:
+        return 'エラー'
 
 
 @app.route("/edit")
 def edit():
     if "flag" in session and session["flag"]:
+        con = psycopg2.connect("host=" + DB_HOSTNAME +
+                               " port=" + "5432" +
+                               " dbname=" + DB_NAME +
+                               " user=" + DB_USERNAME +
+                               " password=" + DB_PASSWORD)
+        sql = 'select * from ' + DB_TABLE
+        with con.cursor() as cur:
+        cur.execute(sql)
+        rows = cur.fetchall()
+        for r in rows:
+            print(r[0])
         return render_template("edit.html")
     else:
         return "かえれ！！！！！！"
