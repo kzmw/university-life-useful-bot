@@ -93,8 +93,14 @@ def edit():
             cur.execute(sql)
             rows = cur.fetchall()
         for r in rows:
-            print(r[0])
-        return render_template("edit.html")
+            if r[0] == session["uid"]:
+                result = []
+                for s in r:
+                    result.append(s) 
+                return render_template("edit.html",result = user_data)
+                break
+        else:
+            return "あなたのデータが登録されてないみたい"
     else:
         return "かえれ！！！！！！"
 
