@@ -2,7 +2,7 @@ from flask import Flask, request, abort, render_template, redirect, session
 import os
 import json
 import requests
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from pytz import timezone
 import urllib.request
 from urllib.parse import urlencode
@@ -155,7 +155,7 @@ def handle_message(event):
             with con.cursor() as cur:
                 cur.execute(sql)
                 rows = cur.fetchall()
-                weekday = datetime.datetime.date.today().weekday()
+                weekday = datetime.date.today().weekday()
                 if weekday == 1:
                     for r in rows:
                         if r[0] == event.source.userId:
