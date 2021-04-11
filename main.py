@@ -156,15 +156,18 @@ def handle_message(event):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 weekday = datetime.date.today().weekday()
-                if weekday == 1:
+                if weekday == 0:
+                    result = []
                     for r in rows:
                         if r[0] == event.source.userId:
-                            result = []
+                            
                             for s in range(11, 25, 1):
                                 result.append(r[s])
                                 break
                             if not result:
                                 reply = "あなたの時間割が登録されていません"
+                                line_bot_api.reply_message(
+                                    event.reply_token, TextSendMessage(text=reply))
                             else:
                                 reply = result[1] + result[2] + result[3] + \
                                     result[4] + result[5] + result[6]
