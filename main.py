@@ -163,6 +163,7 @@ def handle_message(event):
                         if r[0] == event.source.user_id:
                             result = []
                             for s in range(11, 25, 1):
+                                print(s)
                                 result.append(r[s])
                                 break
                             if not result:
