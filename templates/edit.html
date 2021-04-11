@@ -138,9 +138,8 @@
 
   </style>
   <script>
-    let load = {{ user_data|tojson }};
     window.onload = function(){
-      var user_data = load.reverse();
+      var user_data = {{ user_data|tojson }};;
       document.getElementById("user_information").innerHTML = user_data[1] + "さんの設定ページです。";
     }
     function submit(){
