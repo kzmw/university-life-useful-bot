@@ -141,9 +141,21 @@
     window.onload = function(){
       var user_data = {{ user_data|tojson }};;
       document.getElementById("user_information").innerHTML = user_data[1] + 'さんの設定ページです。';
+      document.getElementById("university_name").value = user_data[2];
+      document.getElementById("university_department").value = user_data[3];
+      document.getElementById("home_station").value = user_data[4];
+      document.getElementById("university_station").value = user_data[5];
+      document.getElementById("train_line1").value = user_data[6];
+      document.getElementById("train_line2").value = user_data[7];
+      document.getElementById("train_line3").value = user_data[8];
+      document.getElementById("train_line4").value = user_data[9];
     }
     function submit(){
-
+      xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://university-life-useful-bot.herokuapp.com/submit', true);
+      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+      var request = "uid=" + uid.value + "&arg2=" + arg2.value;
+      xhr.send(request);
 
     }
 
@@ -160,24 +172,24 @@
   <div class="cp_iptxt">
     大学情報
     <label class="ef">
-      <input type="text" placeholder="大学名">
-      <input type="text" placeholder="学部名">
+      <input type="text" id="university_name" placeholder="大学名">
+      <input type="text" id="university_department" placeholder="学部名">
     </label>
   </div>
   <div class="cp_iptxt">
     最寄り駅情報
     <label class="ef">
-      <input type="text" placeholder="自宅">
-      <input type="text" placeholder="大学">
+      <input type="text" id="home_station" placeholder="自宅">
+      <input type="text" id="university_station" placeholder="大学">
     </label>
   </div>
   <div class="cp_iptxt">
     運行情報を知りたい路線
     <label class="ef">
-      <input type="text" placeholder="路線1">
-      <input type="text" placeholder="路線2">
-      <input type="text" placeholder="路線3">
-      <input type="text" placeholder="路線4">
+      <input type="text" id="train_line1" placeholder="路線1">
+      <input type="text" id="train_line2" placeholder="路線2">
+      <input type="text" id="train_line3" placeholder="路線3">
+      <input type="text" id="train_line4" placeholder="路線4">
     </label>
   </div>
     <div class="tabs">
