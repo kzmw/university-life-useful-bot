@@ -170,6 +170,7 @@ def handle_message(event):
                                 line_bot_api.reply_message(
                                     event.reply_token, TextSendMessage(text=reply))
                             else:
+                                print(len(result))
                                 reply = result[1] + result[2] + result[3] + \
                                     result[4] + result[5] + result[6]
                                 line_bot_api.reply_message(
