@@ -157,11 +157,11 @@ def handle_message(event):
                 rows = cur.fetchall()
                 weekday = datetime.date.today().weekday()
                 print(weekday)
-                print(event['source']['userId'])
-                if weekday == 0:
+                print(event.source.user_id)
+                if weekday == 6:
                     result = []
                     for r in rows:
-                        if r[0] == event['source']['userId']:
+                        if r[0] == event.source.user_id:
                             for s in range(11, 25, 1):
                                 result.append(r[s])
                                 break
