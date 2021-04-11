@@ -159,8 +159,7 @@ def handle_message(event):
                 if weekday == 0:
                     result = []
                     for r in rows:
-                        if r[0] == event.source.userId:
-                            
+                        if r[0] == event['source']['userId']:
                             for s in range(11, 25, 1):
                                 result.append(r[s])
                                 break
