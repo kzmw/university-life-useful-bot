@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="Expires" content="1800">
   <title>設定ページ｜大学生活便利Bot</title>
-
   <style>
     body {
       font-family: sans-serif;
@@ -55,13 +54,13 @@
     .cp_iptxt {
       position: relative;
       width: 90%;
-      margin: 40px 3%;
+      margin: 10px 3%;
     }
 
     .cp_iptxt input[type='text'] {
       font: 15px/24px sans-serif;
       box-sizing: border-box;
-      width: 25%;
+      width: 20%;
       padding: 0.3em;
       transition: 0.3s;
       letter-spacing: 1px;
@@ -79,7 +78,6 @@
 
     /*タブ切り替え全体のスタイル*/
     .tabs {
-      margin-top: 50px;
       background-color: #fff;
       width: auto;
       margin: 0 auto;
@@ -88,8 +86,9 @@
     /*タブのスタイル*/
     .tab_item {
       width: calc(100%/7);
-      height: 50px;
-      line-height: 50px;
+      height: 30px;
+      margin-top: 20px;
+      line-height: 30px;
       font-size: 16px;
       text-align: center;
       display: block;
@@ -129,7 +128,27 @@
       border-bottom: 3px solid #1dcd00;
       color: #1dcd00;
     }
+
+    #user_information{
+      margin:10px;
+      padding:10px;
+      border-radius: 4px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.4);
+    }
+
   </style>
+  <script>
+    let load = {{ user_data|tojson }};
+    window.onload = function(){
+      var user_data = load.reverse();
+      document.getElementById("user_information").innerHTML = user_data[1] + "さんの設定ページです。";
+    }
+    function submit(){
+
+
+    }
+
+  </script>
 </head>
 
 <body>
@@ -137,6 +156,31 @@
     <div style="height:50px;text-align:center;display:table;width:100%"><span class="hptitle">大学生活便利Bot</span></div>
   </header>
   <div style="padding-top:50px">
+  <div id="user_information">
+  </div>
+  <div class="cp_iptxt">
+    大学情報
+    <label class="ef">
+      <input type="text" placeholder="大学名">
+      <input type="text" placeholder="学部名">
+    </label>
+  </div>
+  <div class="cp_iptxt">
+    最寄り駅情報
+    <label class="ef">
+      <input type="text" placeholder="自宅付近">
+      <input type="text" placeholder="大学付近">
+    </label>
+  </div>
+  <div class="cp_iptxt">
+    運行情報を知りたい路線
+    <label class="ef">
+      <input type="text" placeholder="路線1">
+      <input type="text" placeholder="路線2">
+      <input type="text" placeholder="路線3">
+      <input type="text" placeholder="路線4">
+    </label>
+  </div>
     <div class="tabs">
       <input id="mon" type="radio" name="tab_item" checked>
       <label class="tab_item" for="mon">月曜日</label>
