@@ -96,13 +96,18 @@ def edit():
             if r[0] == session["uid"]:
                 result = []
                 for s in r:
-                    result.append(s) 
-                return render_template("edit.html",user_data = result)
+                    result.append(s)
+                return render_template("edit.html", user_data=result)
                 break
         else:
-            return "あなたのデータが登録されてないみたい"
+            return render_template("edit.html", user_data='')
     else:
         return "かえれ！！！！！！"
+
+
+@app.route("/submit", methods=['POST'])
+def submit():
+    return request.form["name"] + "さんの設定を保存しました。"
 
 
 @app.route("/callback", methods=['POST'])
@@ -141,9 +146,31 @@ def handle_message(event):
             event.reply_token, TextSendMessage(text=reply))
     elif "時間割" in message:
         if "今日" in message:
-            reply = "今日の時間割"
-            line_bot_api.reply_message(
-                event.reply_token, TextSendMessage(text=reply))
+            con = psycopg2.connect("host=" + DB_HOSTNAME +
+                                   " port=" + "5432" +
+                                   " dbname=" + DB_NAME +
+                                   " user=" + DB_USERNAME +
+                                   " password=" + DB_PASSWORD)
+        sql = 'select * from ' + DB_TABLE
+        with con.cursor() as cur:
+            cur.execute(sql)
+            rows = cur.fetchall()
+            weekday = datetime.date.today().weekday()
+            if weekday == 1:
+                for r in rows:
+                    if r[0] == event.source.userId:
+                        result = []
+                        for s in range(11, 25, 1):
+                            result.append(r[s])
+                            break
+                        if not result:
+                            reply = "あなたの時間割が登録されていません"
+                        else:
+                            reply = result[1] + result[2] + result[3] + \
+                                result[4] + result[5] + result[6]
+                            line_bot_api.reply_message(
+                                event.reply_token, TextSendMessage(text=reply))
+                        break
         elif "明日" in message:
             reply = "明日の時間割"
             line_bot_api.reply_message(
