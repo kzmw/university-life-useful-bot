@@ -156,25 +156,39 @@ def handle_message(event):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 weekday = datetime.date.today().weekday()
-                print(weekday)
-                print(event.source.user_id)
                 if weekday == 6:
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(11, 25):
+                            for s in range(10, 24):
                                 if r[s] is None :
                                     result.append('')
                                 else:
                                     result.append(r[s])
+                            result.append(r[115])
                             if not result:
                                 reply = "あなたの時間割が登録されていません"
                                 line_bot_api.reply_message(
                                     event.reply_token, TextSendMessage(text=reply))
                             else:
-                                print(len(result))
-                                reply = result[1] + result[2] + result[3] + \
-                                    result[4] + result[5] + result[6]
+                                if result[15] == 0: # 科目名のみモード
+                                    i=1
+                                    for t in range(0, 12, 3)
+                                        if result[t] is None:
+                                            i += 1
+                                            continue
+                                        else:
+                                            reply += str(i) + "限：" + result[t] + "\n" 
+                                            i += 1
+                                elif result[15] == 1: # 科目名・担当者名・教室名全部入りモード
+                                    i=1
+                                    for t in range(0, 14, 3)
+                                        if result[t] is None:
+                                            i += 1
+                                            continue
+                                        else:
+                                            reply += str(i) + "限：" + result[t] + "(" + result[t+1] + "・" + result[t+2] + ")\n" 
+                                            i += 1
                                 line_bot_api.reply_message(
                                     event.reply_token, TextSendMessage(text=reply))
                             break
