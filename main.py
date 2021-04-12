@@ -173,7 +173,7 @@ def handle_message(event):
                             else:
                                 if result[15] == 0: # 科目名のみモード
                                     i=1
-                                    for t in range(0, 12, 3)
+                                    for t in range(0, 12, 3):
                                         if result[t] is None:
                                             i += 1
                                             continue
@@ -182,7 +182,7 @@ def handle_message(event):
                                             i += 1
                                 elif result[15] == 1: # 科目名・担当者名・教室名全部入りモード
                                     i=1
-                                    for t in range(0, 14, 3)
+                                    for t in range(0, 14, 3):
                                         if result[t] is None:
                                             i += 1
                                             continue
