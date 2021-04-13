@@ -156,7 +156,7 @@ def handle_message(event):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 weekday = datetime.date.today().weekday()
-                if weekday == 6:
+                if weekday == 1:
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
