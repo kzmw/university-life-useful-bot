@@ -161,7 +161,7 @@ def handle_message(event):
                         if r[0] == event.source.user_id:
                             result = []
                             for s in range(10, 24):
-                                if r[s] is None :
+                                if r[s] is None:
                                     result.append('')
                                 else:
                                     result.append(r[s])
@@ -171,27 +171,29 @@ def handle_message(event):
                                 line_bot_api.reply_message(
                                     event.reply_token, TextSendMessage(text=reply))
                             else:
-                                if result[15] == 0: # 科目名のみモード
-                                    i=1
+                                if result[15] == 0:  # 科目名のみモード
+                                    i = 1
                                     print(i)
                                     for t in range(0, 12, 3):
                                         if result[t] == '':
                                             i += 1
                                             continue
                                         else:
-                                            reply += str(i) + "限：" + result[t] + "\n" 
+                                            reply += str(i) + "限：" + \
+                                                result[t] + "\n"
                                             i += 1
-                                elif result[15] == 1: # 科目名・担当者名・教室名全部入りモード
-                                    i=1
+                                elif result[15] == 1:  # 科目名・担当者名・教室名全部入りモード
+                                    i = 1
                                     for t in range(0, 14, 3):
                                         if result[t] == '':
                                             i += 1
                                             continue
                                         else:
-                                            reply += str(i) + "限：" + result[t] + "(" + result[t+1] + "・" + result[t+2] + ")\n" 
+                                            reply += str(
+                                                i) + "限：" + result[t] + "(" + result[t+1] + "・" + result[t+2] + ")\n"
                                             i += 1
-                                line_bot_api.reply_message(
-                                    event.reply_token, TextSendMessage(text=reply))
+                            line_bot_api.reply_message(
+                                event.reply_token, TextSendMessage(text=reply))
                             break
         elif "明日" in message:
             reply = "明日の時間割"
