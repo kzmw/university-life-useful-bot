@@ -166,6 +166,7 @@ def handle_message(event):
                                 else:
                                     result.append(r[s])
                             result.append(1)
+                            print(len(result))
                             if not result:
                                 reply = "あなたの時間割が登録されていません"
                                 line_bot_api.reply_message(
