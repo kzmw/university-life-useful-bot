@@ -155,9 +155,9 @@
     document.getElementById("train_line3").value = user_data[8];
     document.getElementById("train_line4").value = user_data[9];
     for(var i=1;i<=35;i++){
-    id_name = "tt" + str(i) + "_name";
-    id_teacher = "tt" + str(i) + "_teacher";
-    id_room = "tt" + str(i) + "_room";
+    id_name = "tt" + String(i) + "_name";
+    id_teacher = "tt" + String(i) + "_teacher";
+    id_room = "tt" + String(i) + "_room";
     document.getElementById(id_name).value = user_data[j];
     document.getElementById(id_teacher).value = user_data[j+1];
     document.getElementById(id_room).value = user_data[j+2];
