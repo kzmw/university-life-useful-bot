@@ -136,67 +136,11 @@
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
     }
 
-    /* 全体の枠 */
-    .talk {
-      background-color: rgb(113, 147, 193);
-      /* LINEっぽい背景色 */
-      padding: 1em;
-      overflow: auto;
-    }
-
-    /* 左のトークボックス */
-    .talk .talk_left p:before {
-      /* 左ふきだしの左三角を描画 */
-      content: '';
-      position: absolute;
-      top: 8px;
-      left: -20px;
-      border: 12px solid transparent;
-      border-right: 12px solid white;
-    }
-
-    .talk .talk_left p {
-      /* 左ふきだしの本体 */
-      display: inline-block;
-      position: relative;
-      background-color: white;
-      border-radius: 10px;
-      padding: 10px;
-      margin: 0 0 0 10px;
-    }
-
-    /* 右のトークボックス */
-
-    .talk .talk_right {
-      float: right;
-      /* 右のふきだしは全体的に右寄せ */
-      margin-top: 1em;
-    }
-
-    .talk .talk_right p:after {
-      /* 右ふきだしの右三角を描画 */
-      content: '';
-      position: absolute;
-      top: 8px;
-      right: -20px;
-      border: 12px solid transparent;
-      border-left: 12px solid #85e249;
-    }
-
-    .talk .talk_right p {
-      /* 右ふきだしの本体 */
-      display: inline-block;
-      position: relative;
-      background-color: #85e249;
-      border-radius: 10px;
-      padding: 10px;
-      margin: 0 10px 0 0;
-    }
+    
   </style>
   <script>
     window.onload = function () {
-      var user_data = {{ user_data| tojson
-    }};;
+      var user_data = {{ user_data| tojson }};;
     document.getElementById("user_information").innerHTML = user_data[1] + 'さんの設定ページです。';
     document.getElementById("university_name").value = user_data[2];
     document.getElementById("university_department").value = user_data[3];
@@ -206,6 +150,12 @@
     document.getElementById("train_line2").value = user_data[7];
     document.getElementById("train_line3").value = user_data[8];
     document.getElementById("train_line4").value = user_data[9];
+    document.getElementById("tt1_name").value = user_data[10];
+    document.getElementById("tt1_teacher").value = user_data[11];
+    document.getElementById("tt1_room").value = user_data[12];
+    document.getElementById("tt2_name").value = user_data[13];
+    document.getElementById("tt2_teacher").value = user_data[14];
+    document.getElementById("tt2_room").value = user_data[15];
     }
     function submit() {
       xhr = new XMLHttpRequest();
@@ -249,14 +199,7 @@
         <input type="text" id="train_line4" placeholder="路線4">
       </label>
     </div>
-    <div class="talk">
-      <div class="talk_right">
-        <p>今日の時間割</p>
-      </div>
-      <div class="talk_left">
-        <p>【今日の時間割】<br>1限：地理学概論<br>2限：自然地理学<br>3限：地誌学概論<br>4限：システムプログラミング</p>
-      </div>
-    </div>
+    
     <div class="tabs">
       <input id="mon" type="radio" name="tab_item" checked>
       <label class="tab_item" for="mon">月曜日</label>
@@ -277,41 +220,41 @@
         <div class="cp_iptxt">
           1限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt1_name" placeholder="授業名">
+            <input type="text" id="tt1_teacher" placeholder="担当者名">
+            <input type="text" id="tt1_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           2限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt2_name" placeholder="授業名">
+            <input type="text" id="tt2_teacher" placeholder="担当者名">
+            <input type="text" id="tt2_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           3限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt3_name" placeholder="授業名">
+            <input type="text" id="tt3_teacher" placeholder="担当者名">
+            <input type="text" id="tt3_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           4限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt4_name" placeholder="授業名">
+            <input type="text" id="tt4_teacher" placeholder="担当者名">
+            <input type="text" id="tt4_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           5限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt5_name" placeholder="授業名">
+            <input type="text" id="tt5_teacher" placeholder="担当者名">
+            <input type="text" id="tt5_room" placeholder="教室名">
           </label>
         </div>
       </div>
@@ -319,41 +262,41 @@
         <div class="cp_iptxt">
           1限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt6_name" placeholder="授業名">
+            <input type="text" id="tt6_teacher" placeholder="担当者名">
+            <input type="text" id="tt6_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           2限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt7_name" placeholder="授業名">
+            <input type="text" id="tt7_teacher" placeholder="担当者名">
+            <input type="text" id="tt7_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           3限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt8_name" placeholder="授業名">
+            <input type="text" id="tt8_teacher" placeholder="担当者名">
+            <input type="text" id="tt8_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           4限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt9_name" placeholder="授業名">
+            <input type="text" id="tt9_teacher" placeholder="担当者名">
+            <input type="text" id="tt9_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           5限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt10_name" placeholder="授業名">
+            <input type="text" id="tt10_teacher" placeholder="担当者名">
+            <input type="text" id="tt10_room" placeholder="教室名">
           </label>
         </div>
       </div>
@@ -361,41 +304,41 @@
         <div class="cp_iptxt">
           1限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt11_name" placeholder="授業名">
+            <input type="text" id="tt11_teacher" placeholder="担当者名">
+            <input type="text" id="tt11_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           2限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt12_name" placeholder="授業名">
+            <input type="text" id="tt12_teacher" placeholder="担当者名">
+            <input type="text" id="tt12_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           3限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt13_name" placeholder="授業名">
+            <input type="text" id="tt13_teacher" placeholder="担当者名">
+            <input type="text" id="tt13_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           4限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt14_name" placeholder="授業名">
+            <input type="text" id="tt14_teacher" placeholder="担当者名">
+            <input type="text" id="tt14_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           5限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt15_name" placeholder="授業名">
+            <input type="text" id="tt15_teacher" placeholder="担当者名">
+            <input type="text" id="tt15_room" placeholder="教室名">
           </label>
         </div>
       </div>
@@ -403,41 +346,41 @@
         <div class="cp_iptxt">
           1限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt16_name" placeholder="授業名">
+            <input type="text" id="tt16_teacher" placeholder="担当者名">
+            <input type="text" id="tt16_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           2限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt17_name" placeholder="授業名">
+            <input type="text" id="tt17_teacher" placeholder="担当者名">
+            <input type="text" id="tt17_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           3限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt18_name" placeholder="授業名">
+            <input type="text" id="tt18_teacher" placeholder="担当者名">
+            <input type="text" id="tt18_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           4限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt19_name" placeholder="授業名">
+            <input type="text" id="tt19_teacher" placeholder="担当者名">
+            <input type="text" id="tt19_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           5限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt20_name" placeholder="授業名">
+            <input type="text" id="tt20_teacher" placeholder="担当者名">
+            <input type="text" id="tt20_room" placeholder="教室名">
           </label>
         </div>
       </div>
@@ -445,41 +388,41 @@
         <div class="cp_iptxt">
           1限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt21_name" placeholder="授業名">
+            <input type="text" id="tt21_teacher" placeholder="担当者名">
+            <input type="text" id="tt21_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           2限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt22_name" placeholder="授業名">
+            <input type="text" id="tt22_teacher" placeholder="担当者名">
+            <input type="text" id="tt22_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           3限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt23_name" placeholder="授業名">
+            <input type="text" id="tt23_teacher" placeholder="担当者名">
+            <input type="text" id="tt23_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           4限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt24_name" placeholder="授業名">
+            <input type="text" id="tt24_teacher" placeholder="担当者名">
+            <input type="text" id="tt24_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           5限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt25_name" placeholder="授業名">
+            <input type="text" id="tt25_teacher" placeholder="担当者名">
+            <input type="text" id="tt25_room" placeholder="教室名">
           </label>
         </div>
       </div>
@@ -487,41 +430,41 @@
         <div class="cp_iptxt">
           1限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt26_name" placeholder="授業名">
+            <input type="text" id="tt26_teacher" placeholder="担当者名">
+            <input type="text" id="tt26_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           2限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt27_name" placeholder="授業名">
+            <input type="text" id="tt27_teacher" placeholder="担当者名">
+            <input type="text" id="tt27_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           3限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt28_name" placeholder="授業名">
+            <input type="text" id="tt28_teacher" placeholder="担当者名">
+            <input type="text" id="tt28_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           4限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt29_name" placeholder="授業名">
+            <input type="text" id="tt29_teacher" placeholder="担当者名">
+            <input type="text" id="tt29_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           5限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt30_name" placeholder="授業名">
+            <input type="text" id="tt30_teacher" placeholder="担当者名">
+            <input type="text" id="tt30_room" placeholder="教室名">
           </label>
         </div>
       </div>
@@ -529,41 +472,41 @@
         <div class="cp_iptxt">
           1限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt31_name" placeholder="授業名">
+            <input type="text" id="tt31_teacher" placeholder="担当者名">
+            <input type="text" id="tt31_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           2限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt32_name" placeholder="授業名">
+            <input type="text" id="tt32_teacher" placeholder="担当者名">
+            <input type="text" id="tt32_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           3限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt33_name" placeholder="授業名">
+            <input type="text" id="tt33_teacher" placeholder="担当者名">
+            <input type="text" id="tt33_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           4限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt34_name" placeholder="授業名">
+            <input type="text" id="tt34_teacher" placeholder="担当者名">
+            <input type="text" id="tt34_room" placeholder="教室名">
           </label>
         </div>
         <div class="cp_iptxt">
           5限
           <label class="ef">
-            <input type="text" placeholder="授業名">
-            <input type="text" placeholder="担当者名">
-            <input type="text" placeholder="教室名">
+            <input type="text" id="tt35_name" placeholder="授業名">
+            <input type="text" id="tt35_teacher" placeholder="担当者名">
+            <input type="text" id="tt35_room" placeholder="教室名">
           </label>
         </div>
       </div>
