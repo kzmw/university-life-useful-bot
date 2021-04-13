@@ -173,6 +173,7 @@ def handle_message(event):
                             else:
                                 if result[15] == 0: # 科目名のみモード
                                     i=1
+                                    print(i)
                                     for t in range(0, 12, 3):
                                         if result[t] == '':
                                             i += 1
