@@ -172,7 +172,7 @@ def handle_message(event):
                                 line_bot_api.reply_message(
                                     event.reply_token, TextSendMessage(text=reply))
                             else:
-                                if result[15] == 0:  # 科目名のみモード
+                                if result[14] == 0:  # 科目名のみモード
                                     i = 1
                                     print(i)
                                     for t in range(0, 12, 3):
@@ -183,7 +183,7 @@ def handle_message(event):
                                             reply += str(i) + "限：" + \
                                                 result[t] + "\n"
                                             i += 1
-                                elif result[15] == 1:  # 科目名・担当者名・教室名全部入りモード
+                                elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
                                     i = 1
                                     for t in range(0, 14, 3):
                                         if result[t] == '':
