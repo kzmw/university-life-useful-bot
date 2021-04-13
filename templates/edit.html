@@ -140,6 +140,10 @@
   </style>
   <script>
     window.onload = function () {
+      var j = 10;
+      var id_name = '';
+      var id_teacher = '';
+      var id_room = '';
       var user_data = {{ user_data| tojson }};;
     document.getElementById("user_information").innerHTML = user_data[1] + 'さんの設定ページです。';
     document.getElementById("university_name").value = user_data[2];
@@ -150,12 +154,15 @@
     document.getElementById("train_line2").value = user_data[7];
     document.getElementById("train_line3").value = user_data[8];
     document.getElementById("train_line4").value = user_data[9];
-    document.getElementById("tt1_name").value = user_data[10];
-    document.getElementById("tt1_teacher").value = user_data[11];
-    document.getElementById("tt1_room").value = user_data[12];
-    document.getElementById("tt2_name").value = user_data[13];
-    document.getElementById("tt2_teacher").value = user_data[14];
-    document.getElementById("tt2_room").value = user_data[15];
+    for(var i=1;i<=35;i++){
+    id_name = "tt" + str(i) + "_name";
+    id_teacher = "tt" + str(i) + "_teacher";
+    id_room = "tt" + str(i) + "_room";
+    document.getElementById(id_name).value = user_data[j];
+    document.getElementById(id_teacher).value = user_data[j+1];
+    document.getElementById(id_room).value = user_data[j+2];
+    j += 3
+    }
     }
     function submit() {
       xhr = new XMLHttpRequest();
