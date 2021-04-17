@@ -156,7 +156,38 @@ def handle_message(event):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 weekday = datetime.date.today().weekday()
-                reply = '今日の時間割\n'
+                reply = {
+                    "type": "flex",
+                            "altText": "今日の時間割",
+                            "contents": {
+                                "type": "bubble",
+                                "header": {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "今日の時間割",
+                                            "color": "#FFFFFF",
+                                            "margin": "none",
+                                            "weight": "bold",
+                                            "gravity": "center",
+                                            "size": "xl"
+                                        }
+                                    ],
+                                    "backgroundColor": "#3cb371",
+                                    "margin": "none"
+                                },
+                                "body": {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "contents": [
+                                        {
+                                        }
+                                    ]
+                                }
+                            }
+                }
                 if weekday == 5:
                     for r in rows:
                         if r[0] == event.source.user_id:
@@ -166,7 +197,7 @@ def handle_message(event):
                                     result.append('')
                                 else:
                                     result.append(r[s])
-                            result.append(0)
+                            result.append(1)
                             print(len(result))
                             if not result:
                                 reply = "あなたの時間割が登録されていません"
@@ -181,8 +212,28 @@ def handle_message(event):
                                             i += 1
                                             continue
                                         else:
-                                            reply += str(i) + "限：" + \
-                                                result[t] + "\n"
+                                            reply["contents"]["body"]["contents"][0]["contents"].append({
+                                                "type": "box",
+                                                "layout": "horizontal",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": str(i) + "限：",
+                                                        "margin": "sm",
+                                                        "flex": 1
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "text": result[t],
+                                                        "wrap": true,
+                                                        "flex": 4
+                                                    }
+                                                ]
+                                            })
+                                            container_obj = FlexSendMessage.new_from_json_dict(
+                                                reply)
+                                            line_bot_api.reply_message(
+                                                event.reply_token, messages=container_obj)
                                             i += 1
                                 elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
                                     i = 1
@@ -191,7 +242,8 @@ def handle_message(event):
                                             i += 1
                                             continue
                                         else:
-                                            reply += str(i) + "限：" + result[t] + "(" + result[t+1] + "・" + result[t+2] + ")\n"
+                                            reply += str(
+                                                i) + "限：" + result[t] + "(" + result[t+1] + "・" + result[t+2] + ")\n"
                                             i += 1
                             line_bot_api.reply_message(
                                 event.reply_token, TextSendMessage(text=reply))
