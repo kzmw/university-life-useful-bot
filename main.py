@@ -219,7 +219,7 @@ def handle_message(event):
                                                     {
                                                         "type": "text",
                                                         "text": result[t],
-                                                        "wrap": true,
+                                                        "wrap": True,
                                                         "flex": 4
                                                     }
                                                 ]
