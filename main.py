@@ -182,8 +182,6 @@ def handle_message(event):
                                     "type": "box",
                                     "layout": "vertical",
                                     "contents": [
-                                        {
-                                        }
                                     ]
                                 }
                             }
