@@ -166,7 +166,7 @@ def handle_message(event):
                                     result.append('')
                                 else:
                                     result.append(r[s])
-                            result.append(1)
+                            result.append(0)
                             print(len(result))
                             if not result:
                                 reply = "あなたの時間割が登録されていません"
