@@ -195,7 +195,7 @@ def handle_message(event):
                                     result.append('')
                                 else:
                                     result.append(r[s])
-                            result.append(1)
+                            result.append(0)
                             print(len(result))
                             if result:
                                 if result[14] == 0:  # 科目名のみモード
