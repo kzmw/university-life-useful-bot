@@ -242,11 +242,8 @@ def handle_message(event):
                                             i += 1
                                             continue
                                         else:
-                                            reply += str(
-                                                i) + "限：" + result[t] + "(" + result[t+1] + "・" + result[t+2] + ")\n"
+                                            
                                             i += 1
-                            line_bot_api.reply_message(
-                                event.reply_token, TextSendMessage(text=reply))
                             break
         elif "明日" in message:
             reply = "明日の時間割"
