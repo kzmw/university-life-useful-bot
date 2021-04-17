@@ -157,7 +157,7 @@ def handle_message(event):
                 rows = cur.fetchall()
                 weekday = datetime.date.today().weekday()
                 reply = '今日の時間割\n'
-                if weekday == 1:
+                if weekday == 5:
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
