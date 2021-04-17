@@ -200,9 +200,7 @@ def handle_message(event):
                             result.append(1)
                             print(len(result))
                             if not result:
-                                reply = "あなたの時間割が登録されていません"
-                                line_bot_api.reply_message(
-                                    event.reply_token, TextSendMessage(text=reply))
+
                             else:
                                 if result[14] == 0:  # 科目名のみモード
                                     i = 1
@@ -212,7 +210,7 @@ def handle_message(event):
                                             i += 1
                                             continue
                                         else:
-                                            reply["contents"]["body"]["contents"][0]["contents"].append({
+                                            reply["contents"]["body"]["contents"].append({
                                                 "type": "box",
                                                 "layout": "horizontal",
                                                 "contents": [
