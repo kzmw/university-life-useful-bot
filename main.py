@@ -185,6 +185,7 @@ def handle_message(event):
                 rows = cur.fetchall()
                 now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
                 weekday = now.weekday()
+                print(weekday)
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
