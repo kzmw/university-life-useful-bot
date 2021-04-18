@@ -2,9 +2,8 @@ from flask import Flask, request, abort, render_template, redirect, session
 import os
 import json
 import requests
-from datetime import datetime, timedelta, timezone
-import calendar
-import locale
+import datetime
+import pytz
 import urllib.request
 from urllib.parse import urlencode
 import random
@@ -184,7 +183,8 @@ def handle_message(event):
             with con.cursor() as cur:
                 cur.execute(sql)
                 rows = cur.fetchall()
-                weekday = (datetime.now() + datetime.timedelta(hours=9)).weekday()
+                now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+                weekday = now.weekday()
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
