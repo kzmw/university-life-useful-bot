@@ -184,7 +184,9 @@ def handle_message(event):
                 cur.execute(sql)
                 rows = cur.fetchall()
                 now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+                print('a:' + now)
                 weekday = now.weekday()
+                print('a:' + weekday)
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
