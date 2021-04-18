@@ -185,7 +185,6 @@ def handle_message(event):
                 rows = cur.fetchall()
                 now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
                 weekday = now.weekday()
-                print(weekday)
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
@@ -215,8 +214,9 @@ def handle_message(event):
                                     ]
                                 }
                             }
-                }
+                    }
                 if weekday == 0:
+                    print('aa')
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
