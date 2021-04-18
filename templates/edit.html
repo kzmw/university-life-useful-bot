@@ -170,10 +170,13 @@
       xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
       var request = "university_name=" + document.getElementById("university_name").value + "&university_department=" + document.getElementById("university_department").value + "&home_station=" + document.getElementById("home_station").value + "&university_station=" + document.getElementById("university_station").value + "&train_line1=" + document.getElementById("train_line1").value + "&train_line2=" + document.getElementById("train_line2").value + "&train_line3=" + document.getElementById("train_line3").value + "&train_line4=" + document.getElementById("train_line4").value;
       for(var i=1;i<=35;i++){
-        id_name = "&tt" + String(i) + "_name=";
-        id_teacher = "&tt" + String(i) + "_teacher=";
-        id_room = "&tt" + String(i) + "_room=";
-        request += id_name + document.getElementById(id_name).value + id_teacher + document.getElementById(id_teacher).value + id_room + document.getElementById(id_room).value;
+        id_name = "tt" + String(i) + "_name";
+        id_teacher = "tt" + String(i) + "_teacher";
+        id_room = "tt" + String(i) + "_room";
+        id_name2 = "&tt" + String(i) + "_name=";
+        id_teacher2 = "&tt" + String(i) + "_teacher=";
+        id_room2 = "&tt" + String(i) + "_room=";
+        request += id_name2 + document.getElementById(id_name).value + id_teacher2 + document.getElementById(id_teacher).value + id_room2 + document.getElementById(id_room).value;
       }
       xhr.send(request);
     }
