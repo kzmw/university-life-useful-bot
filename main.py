@@ -245,6 +245,7 @@ def handle_message(event):
                                                     }
                                                 ]
                                             })
+                                            print(reply)
                                             container_obj = FlexSendMessage.new_from_json_dict(
                                                 reply)
                                             line_bot_api.reply_message(
