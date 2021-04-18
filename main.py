@@ -183,7 +183,7 @@ def handle_message(event):
             with con.cursor() as cur:
                 cur.execute(sql)
                 rows = cur.fetchall()
-                weekday = datetime.date.today().weekday()
+                weekday = 1
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
