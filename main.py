@@ -222,7 +222,7 @@ def handle_message(event):
                             if result:
                                 if result[14] == 0:  # 科目名のみモード
                                     i = 1
-                                    for t in range(0, 12, 3):
+                                    for t in range(0, 13, 3):
                                         if result[t] == '':
                                             i += 1
                                             continue
