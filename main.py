@@ -107,7 +107,24 @@ def edit():
 
 @app.route("/submit", methods=['POST'])
 def submit():
-    return request.form["university_name"] + "の人の設定を保存しました。"
+    con = psycopg2.connect("host=" + DB_HOSTNAME +
+                               " port=" + "5432" +
+                               " dbname=" + DB_NAME +
+                               " user=" + DB_USERNAME +
+                               " password=" + DB_PASSWORD)
+        sql = 'select * from ' + DB_TABLE
+        with con.cursor() as cur:
+            cur.execute(sql)
+            rows = cur.fetchall()
+            for r in rows:
+                if r[0] == session["uid"]:
+                    for s in r:
+                        cur.execute("UPDATE " + DB_TABLE + " SET university_name = " + request.form["university_name"] + " WHERE uid = " + session["uid"])
+                        return request.form["university_name"] + "の人の設定を保存しました。"
+                break
+        con.commit()
+        else:
+            return request.form["university_name"] + "の人の設定を保存しました。"
 
 
 @app.route("/callback", methods=['POST'])
