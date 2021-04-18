@@ -113,18 +113,18 @@ def submit():
                            " user=" + DB_USERNAME +
                            " password=" + DB_PASSWORD)
     sql = 'select * from ' + DB_TABLE
-        with con.cursor() as cur:
-            cur.execute(sql)
-            rows = cur.fetchall()
-            for r in rows:
-                if r[0] == session["uid"]:
-                    sql = "UPDATE " + DB_TABLE + " SET university_name = " + \
+    with con.cursor() as cur:
+        cur.execute(sql)
+        rows = cur.fetchall()
+        for r in rows:
+            if r[0] == session["uid"]:
+                sql = "UPDATE " + DB_TABLE + " SET university_name = " + \
                         request.form["university_name"] + \
                             " WHERE uid = " + session["uid"]
-                    cur.execute(sql)
-                    return request.form["university_name"] + "の人の設定を保存しました。"
+                cur.execute(sql)
+                con.commit()
+                return request.form["university_name"] + "の人の設定を保存しました。"
                 break
-        con.commit()
         else:
             return request.form["university_name"] + "の人の設定を保存しました。"
 
