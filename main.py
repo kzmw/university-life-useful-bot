@@ -2,8 +2,7 @@ from flask import Flask, request, abort, render_template, redirect, session
 import os
 import json
 import requests
-import datetime
-from pytz import timezone
+from datetime import datetime, timedelta, timezone
 import urllib.request
 from urllib.parse import urlencode
 import random
@@ -35,6 +34,7 @@ from linebot.models import (
 
 app = Flask(__name__)
 app.secret_key = "zVoYisWmTe"
+JST = timezone(timedelta(hours=9))
 
 # 環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -183,7 +183,7 @@ def handle_message(event):
             with con.cursor() as cur:
                 cur.execute(sql)
                 rows = cur.fetchall()
-                weekday = datetime.date.today().weekday()
+                weekday = datetime.datetime.now(tz=JST).weekday()
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
