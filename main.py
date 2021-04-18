@@ -2,7 +2,7 @@ from flask import Flask, request, abort, render_template, redirect, session
 import os
 import json
 import requests
-import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 import calendar
 import locale
 import urllib.request
@@ -184,7 +184,7 @@ def handle_message(event):
             with con.cursor() as cur:
                 cur.execute(sql)
                 rows = cur.fetchall()
-                weekday = (datetime.now() + datetime.timedelta(hours=9)).weekday()
+                weekday = (datetime.now() + datetime.timedelta(hours=9).weekday()
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
