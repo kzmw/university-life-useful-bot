@@ -145,7 +145,7 @@
       var id_teacher = '';
       var id_room = '';
       var user_data = {{ user_data| tojson }};;
-    document.getElementById("user_information").innerHTML = user_data[1] + 'さんの設定ページです。<button type="button">保存</button>';
+    document.getElementById("user_information").innerHTML = user_data[1] + 'さんの設定ページです。<button type="button" onclick="submit()">保存</button>';
     document.getElementById("university_name").value = user_data[2];
     document.getElementById("university_department").value = user_data[3];
     document.getElementById("home_station").value = user_data[4];
