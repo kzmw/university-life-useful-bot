@@ -118,12 +118,17 @@ def submit():
         rows = cur.fetchall()
         for r in rows:
             if r[0] == session["uid"]:
-                sql = "UPDATE " + DB_TABLE + " SET university_name = '" + request.form["university_name"] + "',university_department = '" + request.form["university_department"] + "',home_station = '" + request.form["university_station"] + "',train_line1 = '" + request.form["train_line1"] + "',train_line2 = '" + request.form["train_line2"] + "',train_line3 = '" + request.form["train_line3"] + "',train_line4 = '" + request.form["train_line4"]
-                for i in range(1,36,1):
+                sql = "UPDATE " + DB_TABLE + " SET university_name = '" + request.form["university_name"] + "',university_department = '" + request.form["university_department"] + "',home_station = '" + request.form["university_station"] + \
+                    "',train_line1 = '" + request.form["train_line1"] + "',train_line2 = '" + request.form["train_line2"] + \
+                    "',train_line3 = '" + \
+                    request.form["train_line3"] + \
+                    "',train_line4 = '" + request.form["train_line4"]
+                for i in range(1, 36, 1):
                     id_name = "',tt" + str(i) + "_name= '"
                     id_teacher = "',tt" + str(i) + "_teacher= '"
                     id_room = "',tt" + str(i) + "_room= '"
-                    sql += id_name + request.form["tt" + str(i) + "_name"] + id_teacher + request.form["tt" + str(i) + "_teacher"] + id_room + request.form["tt" + str(i) + "_room"]
+                    sql += id_name + request.form["tt" + str(i) + "_name"] + id_teacher + request.form["tt" + str(
+                        i) + "_teacher"] + id_room + request.form["tt" + str(i) + "_room"]
                 sql += "'WHERE uid = '" + session["uid"] + "'"
                 cur.execute(sql)
                 con.commit()
@@ -245,12 +250,11 @@ def handle_message(event):
                                                     }
                                                 ]
                                             })
-                                            print(reply)
-                                            container_obj = FlexSendMessage.new_from_json_dict(
-                                                reply)
-                                            line_bot_api.reply_message(
-                                                event.reply_token, messages=container_obj)
                                             i += 1
+                                    container_obj = FlexSendMessage.new_from_json_dict(
+                                        reply)
+                                    line_bot_api.reply_message(
+                                        event.reply_token, messages=container_obj)
                                 elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
                                     i = 1
                                     for t in range(0, 14, 3):
