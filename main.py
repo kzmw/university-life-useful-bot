@@ -36,7 +36,6 @@ from linebot.models import (
 
 app = Flask(__name__)
 app.secret_key = "zVoYisWmTe"
-locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
 # 環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -185,7 +184,7 @@ def handle_message(event):
             with con.cursor() as cur:
                 cur.execute(sql)
                 rows = cur.fetchall()
-                weekday = datetime.date.today().weekday()
+                weekday = datetime.datetime.timedelta(hours=9).weekday()
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
