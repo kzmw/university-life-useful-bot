@@ -118,7 +118,7 @@ def submit():
         rows = cur.fetchall()
         for r in rows:
             if r[0] == session["uid"]:
-                sql = 'UPDATE ' + DB_TABLE + ' SET university_name = ' + request.form["university_name"] + ' WHERE uid = "' + session["uid"] + '"'
+                sql = 'UPDATE ' + DB_TABLE + ' SET university_name = "' + request.form["university_name"] + '" WHERE uid = "' + session["uid"] + '"'
                 cur.execute(sql)
                 con.commit()
                 return request.form["university_name"] + "の人の設定を保存しました。"
