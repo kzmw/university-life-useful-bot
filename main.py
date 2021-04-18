@@ -108,19 +108,21 @@ def edit():
 @app.route("/submit", methods=['POST'])
 def submit():
     con = psycopg2.connect("host=" + DB_HOSTNAME +
-                               " port=" + "5432" +
-                               " dbname=" + DB_NAME +
-                               " user=" + DB_USERNAME +
-                               " password=" + DB_PASSWORD)
+                           " port=" + "5432" +
+                           " dbname=" + DB_NAME +
+                           " user=" + DB_USERNAME +
+                           " password=" + DB_PASSWORD)
     sql = 'select * from ' + DB_TABLE
         with con.cursor() as cur:
             cur.execute(sql)
             rows = cur.fetchall()
             for r in rows:
                 if r[0] == session["uid"]:
-                        sql = "UPDATE " + DB_TABLE + " SET university_name = " + request.form["university_name"] + " WHERE uid = " + session["uid"]
-                        cur.execute(sql)
-                        return request.form["university_name"] + "の人の設定を保存しました。"
+                    sql = "UPDATE " + DB_TABLE + " SET university_name = " + \
+                        request.form["university_name"] + \
+                            " WHERE uid = " + session["uid"]
+                    cur.execute(sql)
+                    return request.form["university_name"] + "の人の設定を保存しました。"
                 break
         con.commit()
         else:
@@ -251,7 +253,7 @@ def handle_message(event):
                                             i += 1
                                             continue
                                         else:
-                                            
+
                                             i += 1
                             break
         elif "明日" in message:
