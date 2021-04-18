@@ -112,7 +112,7 @@ def submit():
                                " dbname=" + DB_NAME +
                                " user=" + DB_USERNAME +
                                " password=" + DB_PASSWORD)
-        sql = 'select * from ' + DB_TABLE
+    sql = 'select * from ' + DB_TABLE
         with con.cursor() as cur:
             cur.execute(sql)
             rows = cur.fetchall()
