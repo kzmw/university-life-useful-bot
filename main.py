@@ -3,6 +3,8 @@ import os
 import json
 import requests
 from datetime import datetime, timedelta, timezone
+import calendar
+import locale
 import urllib.request
 from urllib.parse import urlencode
 import random
@@ -34,7 +36,7 @@ from linebot.models import (
 
 app = Flask(__name__)
 app.secret_key = "zVoYisWmTe"
-JST = timezone(timedelta(hours=9))
+locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
 # 環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -183,7 +185,7 @@ def handle_message(event):
             with con.cursor() as cur:
                 cur.execute(sql)
                 rows = cur.fetchall()
-                weekday = datetime.datetime.now(tz=JST).weekday()
+                weekday = datetime.date.today().weekday()
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
