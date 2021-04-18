@@ -2,7 +2,7 @@ from flask import Flask, request, abort, render_template, redirect, session
 import os
 import json
 import requests
-from datetime import datetime, timedelta, timezone
+import datetime, timedelta, timezone
 import calendar
 import locale
 import urllib.request
