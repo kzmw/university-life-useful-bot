@@ -168,9 +168,8 @@
       xhr = new XMLHttpRequest();
       xhr.open('POST', 'https://university-life-useful-bot.herokuapp.com/submit', true);
       xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-      var request = "uid=" + uid.value + "&arg2=" + arg2.value;
+      var request = "university_name=" + document.getElementById("university_name").value + "&university_department=" + document.getElementById("university_department").value + "&home_station=" + document.getElementById("home_station").value + "&university_station=" + document.getElementById("university_station").value + "&train_line1=" + document.getElementById("train_line1").value + "&train_line2=" + document.getElementById("train_line2").value + "&train_line3=" + document.getElementById("train_line3").value + "&train_line4=" + document.getElementById("train_line4").value;
       xhr.send(request);
-
     }
 
   </script>

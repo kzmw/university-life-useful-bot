@@ -100,14 +100,14 @@ def edit():
                 return render_template("edit.html", user_data=result)
                 break
         else:
-            return render_template("edit.html", user_data='')
+            return render_template("edit.html", user_data=[])
     else:
         return "かえれ！！！！！！"
 
 
 @app.route("/submit", methods=['POST'])
 def submit():
-    return request.form["name"] + "さんの設定を保存しました。"
+    return request.form["university_name"] + "の人の設定を保存しました。"
 
 
 @app.route("/callback", methods=['POST'])
@@ -196,11 +196,9 @@ def handle_message(event):
                                 else:
                                     result.append(r[s])
                             result.append(0)
-                            print(len(result))
                             if result:
                                 if result[14] == 0:  # 科目名のみモード
                                     i = 1
-                                    print(i)
                                     for t in range(0, 12, 3):
                                         if result[t] == '':
                                             i += 1
