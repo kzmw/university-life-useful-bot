@@ -209,7 +209,7 @@ def handle_message(event):
                                 }
                             }
                 }
-                if weekday == 5:
+                if weekday == 6:
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
