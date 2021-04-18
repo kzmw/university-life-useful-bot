@@ -185,7 +185,6 @@ def handle_message(event):
                 rows = cur.fetchall()
                 now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
                 weekday = now.weekday()
-                print(weekday)
                 reply = {
                     "type": "flex",
                             "altText": "今日の時間割",
@@ -217,7 +216,6 @@ def handle_message(event):
                             }
                     }
                 if weekday == 0:
-                    print('aa')
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
@@ -228,7 +226,7 @@ def handle_message(event):
                                     result.append(r[s])
                             result.append(0)
                             if result:
-                                if result[14] == 0:  # 科目名のみモード
+                                if result[15] == 0:  # 科目名のみモード
                                     i = 1
                                     for t in range(0, 13, 3):
                                         if result[t] == '':
@@ -254,8 +252,7 @@ def handle_message(event):
                                                 ]
                                             })
                                             i += 1
-                                    container_obj = FlexSendMessage.new_from_json_dict(
-                                        reply)
+                                    container_obj = FlexSendMessage.new_from_json_dict(reply)
                                     line_bot_api.reply_message(
                                         event.reply_token, messages=container_obj)
                                 elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
@@ -279,7 +276,7 @@ def handle_message(event):
                                     result.append(r[s])
                             result.append(0)
                             if result:
-                                if result[14] == 0:  # 科目名のみモード
+                                if result[15] == 0:  # 科目名のみモード
                                     i = 1
                                     for t in range(0, 13, 3):
                                         if result[t] == '':
@@ -330,7 +327,7 @@ def handle_message(event):
                                     result.append(r[s])
                             result.append(0)
                             if result:
-                                if result[14] == 0:  # 科目名のみモード
+                                if result[15] == 0:  # 科目名のみモード
                                     i = 1
                                     for t in range(0, 13, 3):
                                         if result[t] == '':
@@ -381,7 +378,7 @@ def handle_message(event):
                                     result.append(r[s])
                             result.append(0)
                             if result:
-                                if result[14] == 0:  # 科目名のみモード
+                                if result[15] == 0:  # 科目名のみモード
                                     i = 1
                                     for t in range(0, 13, 3):
                                         if result[t] == '':
@@ -432,7 +429,7 @@ def handle_message(event):
                                     result.append(r[s])
                             result.append(0)
                             if result:
-                                if result[14] == 0:  # 科目名のみモード
+                                if result[15] == 0:  # 科目名のみモード
                                     i = 1
                                     for t in range(0, 13, 3):
                                         if result[t] == '':
@@ -483,7 +480,7 @@ def handle_message(event):
                                     result.append(r[s])
                             result.append(0)
                             if result:
-                                if result[14] == 0:  # 科目名のみモード
+                                if result[15] == 0:  # 科目名のみモード
                                     i = 1
                                     for t in range(0, 13, 3):
                                         if result[t] == '':
@@ -534,7 +531,7 @@ def handle_message(event):
                                     result.append(r[s])
                             result.append(0)
                             if result:
-                                if result[14] == 0:  # 科目名のみモード
+                                if result[15] == 0:  # 科目名のみモード
                                     i = 1
                                     for t in range(0, 13, 3):
                                         if result[t] == '':
