@@ -572,9 +572,403 @@ def handle_message(event):
                                             i += 1
                             break
         elif "明日" in message:
-            reply = "明日の時間割"
-            line_bot_api.reply_message(
-                event.reply_token, TextSendMessage(text=reply))
+            con = psycopg2.connect("host=" + DB_HOSTNAME +
+                                   " port=" + "5432" +
+                                   " dbname=" + DB_NAME +
+                                   " user=" + DB_USERNAME +
+                                   " password=" + DB_PASSWORD)
+            sql = 'select * from ' + DB_TABLE
+            with con.cursor() as cur:
+                cur.execute(sql)
+                rows = cur.fetchall()
+                now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+                weekday = now.weekday() + 1
+                reply = {
+                    "type": "flex",
+                            "altText": "今日の時間割",
+                            "contents": {
+                                "type": "bubble",
+                                "header": {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "今日の時間割",
+                                            "color": "#FFFFFF",
+                                            "margin": "none",
+                                            "weight": "bold",
+                                            "gravity": "center",
+                                            "size": "xl"
+                                        }
+                                    ],
+                                    "backgroundColor": "#3cb371",
+                                    "margin": "none"
+                                },
+                                "body": {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "contents": [
+                                    ]
+                                }
+                            }
+                    }
+                if weekday == 7:
+                    for r in rows:
+                        if r[0] == event.source.user_id:
+                            result = []
+                            for s in range(10, 25):
+                                if r[s] is None:
+                                    result.append('')
+                                else:
+                                    result.append(r[s])
+                            result.append(0)
+                            if result:
+                                if result[15] == 0:  # 科目名のみモード
+                                    i = 1
+                                    for t in range(0, 13, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+                                            reply["contents"]["body"]["contents"].append({
+                                                "type": "box",
+                                                "layout": "horizontal",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": str(i) + "限：",
+                                                        "margin": "sm",
+                                                        "flex": 1
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "text": result[t],
+                                                        "wrap": True,
+                                                        "flex": 4
+                                                    }
+                                                ]
+                                            })
+                                            i += 1
+                                    container_obj = FlexSendMessage.new_from_json_dict(reply)
+                                    line_bot_api.reply_message(
+                                        event.reply_token, messages=container_obj)
+                                elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
+                                    i = 1
+                                    for t in range(0, 14, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+
+                                            i += 1
+                            break
+                if weekday == 1:
+                    for r in rows:
+                        if r[0] == event.source.user_id:
+                            result = []
+                            for s in range(25, 39):
+                                if r[s] is None:
+                                    result.append('')
+                                else:
+                                    result.append(r[s])
+                            result.append(0)
+                            if result:
+                                if result[15] == 0:  # 科目名のみモード
+                                    i = 1
+                                    for t in range(0, 13, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+                                            reply["contents"]["body"]["contents"].append({
+                                                "type": "box",
+                                                "layout": "horizontal",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": str(i) + "限：",
+                                                        "margin": "sm",
+                                                        "flex": 1
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "text": result[t],
+                                                        "wrap": True,
+                                                        "flex": 4
+                                                    }
+                                                ]
+                                            })
+                                            i += 1
+                                    container_obj = FlexSendMessage.new_from_json_dict(
+                                        reply)
+                                    line_bot_api.reply_message(
+                                        event.reply_token, messages=container_obj)
+                                elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
+                                    i = 1
+                                    for t in range(0, 14, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+
+                                            i += 1
+                            break
+                if weekday == 2:
+                    for r in rows:
+                        if r[0] == event.source.user_id:
+                            result = []
+                            for s in range(39, 53):
+                                if r[s] is None:
+                                    result.append('')
+                                else:
+                                    result.append(r[s])
+                            result.append(0)
+                            if result:
+                                if result[15] == 0:  # 科目名のみモード
+                                    i = 1
+                                    for t in range(0, 13, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+                                            reply["contents"]["body"]["contents"].append({
+                                                "type": "box",
+                                                "layout": "horizontal",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": str(i) + "限：",
+                                                        "margin": "sm",
+                                                        "flex": 1
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "text": result[t],
+                                                        "wrap": True,
+                                                        "flex": 4
+                                                    }
+                                                ]
+                                            })
+                                            i += 1
+                                    container_obj = FlexSendMessage.new_from_json_dict(
+                                        reply)
+                                    line_bot_api.reply_message(
+                                        event.reply_token, messages=container_obj)
+                                elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
+                                    i = 1
+                                    for t in range(0, 14, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+
+                                            i += 1
+                            break
+                if weekday == 3:
+                    for r in rows:
+                        if r[0] == event.source.user_id:
+                            result = []
+                            for s in range(53, 67):
+                                if r[s] is None:
+                                    result.append('')
+                                else:
+                                    result.append(r[s])
+                            result.append(0)
+                            if result:
+                                if result[15] == 0:  # 科目名のみモード
+                                    i = 1
+                                    for t in range(0, 13, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+                                            reply["contents"]["body"]["contents"].append({
+                                                "type": "box",
+                                                "layout": "horizontal",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": str(i) + "限：",
+                                                        "margin": "sm",
+                                                        "flex": 1
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "text": result[t],
+                                                        "wrap": True,
+                                                        "flex": 4
+                                                    }
+                                                ]
+                                            })
+                                            i += 1
+                                    container_obj = FlexSendMessage.new_from_json_dict(
+                                        reply)
+                                    line_bot_api.reply_message(
+                                        event.reply_token, messages=container_obj)
+                                elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
+                                    i = 1
+                                    for t in range(0, 14, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+
+                                            i += 1
+                            break
+                if weekday == 4:
+                    for r in rows:
+                        if r[0] == event.source.user_id:
+                            result = []
+                            for s in range(67, 81):
+                                if r[s] is None:
+                                    result.append('')
+                                else:
+                                    result.append(r[s])
+                            result.append(0)
+                            if result:
+                                if result[15] == 0:  # 科目名のみモード
+                                    i = 1
+                                    for t in range(0, 13, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+                                            reply["contents"]["body"]["contents"].append({
+                                                "type": "box",
+                                                "layout": "horizontal",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": str(i) + "限：",
+                                                        "margin": "sm",
+                                                        "flex": 1
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "text": result[t],
+                                                        "wrap": True,
+                                                        "flex": 4
+                                                    }
+                                                ]
+                                            })
+                                            i += 1
+                                    container_obj = FlexSendMessage.new_from_json_dict(
+                                        reply)
+                                    line_bot_api.reply_message(
+                                        event.reply_token, messages=container_obj)
+                                elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
+                                    i = 1
+                                    for t in range(0, 14, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+
+                                            i += 1
+                            break
+                if weekday == 5:
+                    for r in rows:
+                        if r[0] == event.source.user_id:
+                            result = []
+                            for s in range(81, 95):
+                                if r[s] is None:
+                                    result.append('')
+                                else:
+                                    result.append(r[s])
+                            result.append(0)
+                            if result:
+                                if result[15] == 0:  # 科目名のみモード
+                                    i = 1
+                                    for t in range(0, 13, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+                                            reply["contents"]["body"]["contents"].append({
+                                                "type": "box",
+                                                "layout": "horizontal",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": str(i) + "限：",
+                                                        "margin": "sm",
+                                                        "flex": 1
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "text": result[t],
+                                                        "wrap": True,
+                                                        "flex": 4
+                                                    }
+                                                ]
+                                            })
+                                            i += 1
+                                    container_obj = FlexSendMessage.new_from_json_dict(
+                                        reply)
+                                    line_bot_api.reply_message(
+                                        event.reply_token, messages=container_obj)
+                                elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
+                                    i = 1
+                                    for t in range(0, 14, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+
+                                            i += 1
+                            break
+                if weekday == 6:
+                    for r in rows:
+                        if r[0] == event.source.user_id:
+                            result = []
+                            for s in range(95, 109):
+                                if r[s] is None:
+                                    result.append('')
+                                else:
+                                    result.append(r[s])
+                            result.append(0)
+                            if result:
+                                if result[15] == 0:  # 科目名のみモード
+                                    i = 1
+                                    for t in range(0, 13, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+                                            reply["contents"]["body"]["contents"].append({
+                                                "type": "box",
+                                                "layout": "horizontal",
+                                                "contents": [
+                                                    {
+                                                        "type": "text",
+                                                        "text": str(i) + "限：",
+                                                        "margin": "sm",
+                                                        "flex": 1
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "text": result[t],
+                                                        "wrap": True,
+                                                        "flex": 4
+                                                    }
+                                                ]
+                                            })
+                                            i += 1
+                                    container_obj = FlexSendMessage.new_from_json_dict(
+                                        reply)
+                                    line_bot_api.reply_message(
+                                        event.reply_token, messages=container_obj)
+                                elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
+                                    i = 1
+                                    for t in range(0, 14, 3):
+                                        if result[t] == '':
+                                            i += 1
+                                            continue
+                                        else:
+
+                                            i += 1
+                            break
         else:
             reply = "いつの時間割を返信するか送ってください！\n例：「今日の時間割」"
             line_bot_api.reply_message(
