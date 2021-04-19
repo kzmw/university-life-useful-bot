@@ -624,6 +624,7 @@ def handle_message(event):
                                     result.append(r[s])
                             result.append(0)
                             if result:
+                                print(result)
                                 if result[15] == 0:  # 科目名のみモード
                                     i = 1
                                     for t in range(0, 13, 3):
