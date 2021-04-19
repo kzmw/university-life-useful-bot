@@ -585,7 +585,7 @@ def handle_message(event):
                 weekday = now.weekday() + 1
                 reply = {
                     "type": "flex",
-                            "altText": "今日の時間割",
+                            "altText": "明日の時間割",
                             "contents": {
                                 "type": "bubble",
                                 "header": {
@@ -594,7 +594,7 @@ def handle_message(event):
                                     "contents": [
                                         {
                                             "type": "text",
-                                            "text": "今日の時間割",
+                                            "text": "明日の時間割",
                                             "color": "#FFFFFF",
                                             "margin": "none",
                                             "weight": "bold",
