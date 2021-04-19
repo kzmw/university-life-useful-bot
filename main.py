@@ -269,7 +269,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(25, 39):
+                            for s in range(25, 40):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -320,7 +320,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(39, 53):
+                            for s in range(40, 55):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -371,7 +371,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(53, 67):
+                            for s in range(55, 70):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -422,7 +422,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(67, 81):
+                            for s in range(70, 85):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -473,7 +473,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(81, 95):
+                            for s in range(85, 100):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -524,7 +524,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(95, 109):
+                            for s in range(100, 115):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -667,14 +667,13 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(25, 39):
+                            for s in range(25, 40):
                                 if r[s] is None:
                                     result.append('')
                                 else:
                                     result.append(r[s])
                             result.append(0)
                             if result:
-                                print(len(result))
                                 if result[15] == 0:  # 科目名のみモード
                                     i = 1
                                     for t in range(0, 13, 3):
@@ -719,7 +718,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(39, 53):
+                            for s in range(40, 55):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -770,7 +769,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(53, 67):
+                            for s in range(55, 70):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -821,7 +820,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(67, 81):
+                            for s in range(70, 85):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -872,7 +871,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(81, 95):
+                            for s in range(85, 100):
                                 if r[s] is None:
                                     result.append('')
                                 else:
@@ -923,7 +922,7 @@ def handle_message(event):
                     for r in rows:
                         if r[0] == event.source.user_id:
                             result = []
-                            for s in range(95, 109):
+                            for s in range(100, 115):
                                 if r[s] is None:
                                     result.append('')
                                 else:
