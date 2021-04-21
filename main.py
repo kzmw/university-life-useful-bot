@@ -160,7 +160,7 @@ def admin():
         with con.cursor() as cur:
             cur.execute(sql)
             rows = cur.fetchall()
-            render_template("admin.html", user_data=rows)
+            return render_template("admin.html", user_data=rows)
 
 
 @app.route("/callback", methods=['POST'])
