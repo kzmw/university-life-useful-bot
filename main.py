@@ -118,11 +118,7 @@ def submit():
         rows = cur.fetchall()
         for r in rows:
             if r[0] == session["uid"]:
-                sql = "UPDATE " + DB_TABLE + " SET university_name = '" + request.form["university_name"] + "',university_department = '" + request.form["university_department"] + "',home_station = '" + request.form["home_station"] + "',university_station = '" + \
-                    request.form["university_station"] + "',train_line1 = '" + request.form["train_line1"] + "',train_line2 = '" + \
-                    request.form["train_line2"] + "',train_line3 = '" + \
-                    request.form["train_line3"] + \
-                    "',train_line4 = '" + request.form["train_line4"]
+                sql = "UPDATE " + DB_TABLE + " SET name= '" + session["name"]
                 for i in range(1, 36, 1):
                     id_name = "',tt" + str(i) + "_name= '"
                     id_teacher = "',tt" + str(i) + "_teacher= '"
