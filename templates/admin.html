@@ -146,7 +146,7 @@
       var id_room = '';
       var select_option = '';
       var user_data = {{ user_data| tojson }};
-      for (var k=0;k<=user_data.length;k++){
+      for (var k=0;k<=user_data.length - 1;k++){
         select_option += '<option value="' + String(k) + '">' + user_data[k][1] + '</option>'
       }
     document.getElementById("user_information").innerHTML = '管理者用ページです。<select id="user_select" size="1" onchange="select_change()">' + select_option + '</select><button type="button" onclick="submit()">保存</button>';
