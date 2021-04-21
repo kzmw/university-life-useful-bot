@@ -979,7 +979,7 @@ def handle_message(event):
                 url = 'https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json'
                 res = urllib.request.urlopen(url)
                 json_load = json.loads(res.read().decode('utf-8'))
-                today = datetime.datetime.now(timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
+                today = datetime.datetime.now(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
                 reportDatetime = json_load[0]["reportDatetime"]
                 today_comparenum = reportDatetime.find('T')
                 today_comparetxt = reportDatetime[:today_comparenum]
@@ -1325,7 +1325,7 @@ def handle_message(event):
                 url = 'https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json'
                 res = urllib.request.urlopen(url)
                 json_load = json.loads(res.read().decode('utf-8'))
-                today = datetime.datetime.now(timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
+                today = datetime.datetime.now(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
                 reportDatetime = json_load[0]["reportDatetime"]
                 today_comparenum = reportDatetime.find('T')
                 today_comparetxt = reportDatetime[:today_comparenum]
