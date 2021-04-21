@@ -135,7 +135,17 @@ def submit():
                 return session["name"] + "の設定を保存しました。"
                 break
         else:
-            return session["name"] + "の設定を保存しました。"
+            sql = "INSERT INTO " + DB_TABLE + " VALUES ('" + request.form["university_name"] + "','" + request.form["university_department"] + "','" + request.form["home_station"] + "','" + \
+                    request.form["university_station"] + "','" + request.form["train_line1"] + "','" + \
+                    request.form["train_line2"] + "','" + \
+                    request.form["train_line3"] + \
+                    "','" + request.form["train_line4"]
+                for i in range(1, 36, 1):
+                    sql += "','" + request.form["tt" + str(i) + "_name"] + "','" + request.form["tt" + str(
+                        i) + "_teacher"] + "','" + request.form["tt" + str(i) + "_room"] + ")"
+                cur.execute(sql)
+                con.commit()
+                return session["name"] + "の設定を保存しました。"
 
 
 @app.route("/callback", methods=['POST'])
