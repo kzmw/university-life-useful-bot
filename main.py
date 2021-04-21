@@ -135,14 +135,9 @@ def submit():
                 return session["name"] + "の設定を保存しました。"
                 break
         else:
-            sql = "INSERT INTO " + DB_TABLE + " VALUES ('" + request.form["university_name"] + "','" + request.form["university_department"] + "','" + request.form["home_station"] + "','" + \
-                    request.form["university_station"] + "','" + request.form["train_line1"] + "','" + \
-                    request.form["train_line2"] + "','" + \
-                    request.form["train_line3"] + \
-                    "','" + request.form["train_line4"]
+            sql = "INSERT INTO " + DB_TABLE + " VALUES ('" + request.form["university_name"] + "','" + request.form["university_department"] + "','" + request.form["home_station"] + "','" + request.form["university_station"] + "','" + request.form["train_line1"] + "','" + request.form["train_line2"] + "','" + request.form["train_line3"] + "','" + request.form["train_line4"]
                 for i in range(1, 36, 1):
-                    sql += "','" + request.form["tt" + str(i) + "_name"] + "','" + request.form["tt" + str(
-                        i) + "_teacher"] + "','" + request.form["tt" + str(i) + "_room"] + ")"
+                    sql += "','" + request.form["tt" + str(i) + "_name"] + "','" + request.form["tt" + str(i) + "_teacher"] + "','" + request.form["tt" + str(i) + "_room"] + ")"
                 cur.execute(sql)
                 con.commit()
                 return session["name"] + "の設定を保存しました。"
@@ -224,7 +219,7 @@ def handle_message(event):
                                     ]
                                 }
                             }
-                    }
+                }
                 if weekday == 0:
                     for r in rows:
                         if r[0] == event.source.user_id:
@@ -262,7 +257,8 @@ def handle_message(event):
                                                 ]
                                             })
                                             i += 1
-                                    container_obj = FlexSendMessage.new_from_json_dict(reply)
+                                    container_obj = FlexSendMessage.new_from_json_dict(
+                                        reply)
                                     line_bot_api.reply_message(
                                         event.reply_token, messages=container_obj)
                                 elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
@@ -622,7 +618,7 @@ def handle_message(event):
                                     ]
                                 }
                             }
-                    }
+                }
                 if weekday == 7:
                     for r in rows:
                         if r[0] == event.source.user_id:
@@ -660,7 +656,8 @@ def handle_message(event):
                                                 ]
                                             })
                                             i += 1
-                                    container_obj = FlexSendMessage.new_from_json_dict(reply)
+                                    container_obj = FlexSendMessage.new_from_json_dict(
+                                        reply)
                                     line_bot_api.reply_message(
                                         event.reply_token, messages=container_obj)
                                 elif result[14] == 1:  # 科目名・担当者名・教室名全部入りモード
@@ -989,7 +986,8 @@ def handle_message(event):
                 url = 'https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json'
                 res = urllib.request.urlopen(url)
                 json_load = json.loads(res.read().decode('utf-8'))
-                today = datetime.datetime.now(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
+                today = datetime.datetime.now(
+                    pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
                 reportDatetime = json_load[0]["reportDatetime"]
                 today_comparenum = reportDatetime.find('T')
                 today_comparetxt = reportDatetime[:today_comparenum]
@@ -1335,7 +1333,8 @@ def handle_message(event):
                 url = 'https://www.jma.go.jp/bosai/forecast/data/forecast/270000.json'
                 res = urllib.request.urlopen(url)
                 json_load = json.loads(res.read().decode('utf-8'))
-                today = datetime.datetime.now(pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
+                today = datetime.datetime.now(
+                    pytz.timezone('Asia/Tokyo')).strftime("%Y-%m-%d")
                 reportDatetime = json_load[0]["reportDatetime"]
                 today_comparenum = reportDatetime.find('T')
                 today_comparetxt = reportDatetime[:today_comparenum]
