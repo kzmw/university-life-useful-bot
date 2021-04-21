@@ -151,6 +151,25 @@
       }
     document.getElementById("user_information").innerHTML = '管理者用ページです。<select id="user_select" size="1" onchange="select_change()">' + select_option + '</select><button type="button" onclick="submit()">保存</button>';
     }
+
+    function select_change() {
+      var j = 10;
+      var id_name = '';
+      var id_teacher = '';
+      var id_room = '';
+      var num = Number(document.getElementById("user_select").value);
+      var user_data = {{ user_data| tojson }};
+    for(var i=1;i<=35;i++){
+    id_name = "tt" + String(i) + "_name";
+    id_teacher = "tt" + String(i) + "_teacher";
+    id_room = "tt" + String(i) + "_room";
+    document.getElementById(id_name).value = user_data[num][j];
+    document.getElementById(id_teacher).value = user_data[num][j+1];
+    document.getElementById(id_room).value = user_data[num][j+2];
+    j += 3
+    }
+    }
+
     function submit() {
       xhr = new XMLHttpRequest();
       xhr.open('POST', 'https://university-life-useful-bot.herokuapp.com/submit', true);
@@ -178,7 +197,7 @@
   <div style="padding-top:50px">
     <div id="user_information">
     </div>
-    <div class="cp_iptxt">
+<!--     <div class="cp_iptxt">
       大学情報
       <label class="ef">
         <input type="text" id="university_name" placeholder="大学名">
@@ -200,7 +219,7 @@
         <input type="text" id="train_line3" placeholder="路線3">
         <input type="text" id="train_line4" placeholder="路線4">
       </label>
-    </div>
+    </div> -->
     
     <div class="tabs">
       <input id="mon" type="radio" name="tab_item" checked>
