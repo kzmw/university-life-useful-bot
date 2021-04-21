@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta http-equiv="content-type" charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Expires" content="1800">
+  <title>管理者用ページ｜大学生活便利Bot</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #FFF;
+      color: #000;
+    }
+
+    header {
+      background: #b33c64;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, .7);
+      left: 0;
+      line-height: 1;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 50px;
+      z-index: 2;
+      border: none;
+    }
+
+    .hptitle {
+      color: #FFF;
+      display: table-cell;
+      width: 100%;
+      font-size: 35px;
+      height: 50px;
+      font-weight: 700;
+      line-height: 35px;
+      vertical-align: middle;
+    }
+
+    @media screen and (max-width:740px) {
+      .hptitle {
+        color: #FFF;
+        display: table-cell;
+        width: 100%;
+        font-size: 4.72vw;
+        height: 50px;
+        line-height: 4.72vw;
+        font-weight: 700;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+    }
+
+    .cp_iptxt {
+      position: relative;
+      width: 90%;
+      margin: 10px 3%;
+    }
+
+    .cp_iptxt input[type='text'] {
+      font: 15px/24px sans-serif;
+      box-sizing: border-box;
+      width: 20%;
+      padding: 0.3em;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      color: #1b2538;
+      border: none;
+      border-bottom: 2px solid #1b2538;
+      background: transparent;
+      border-radius: 0px;
+    }
+
+    .ef input[type='text']:focus {
+      border-bottom: 2px solid #da3c41;
+      outline: none;
+    }
+
+    /*タブ切り替え全体のスタイル*/
+    .tabs {
+      background-color: #fff;
+      width: auto;
+      margin: 0 auto;
+    }
+
+    /*タブのスタイル*/
+    .tab_item {
+      width: calc(100%/7);
+      height: 30px;
+      margin-top: 20px;
+      line-height: 30px;
+      font-size: 16px;
+      text-align: center;
+      display: block;
+      float: left;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+      border-bottom: 3px solid #1b2538;
+    }
+
+    /*ラジオボタンを全て消す*/
+    input[name="tab_item"] {
+      display: none;
+    }
+
+    /*タブ切り替えの中身のスタイル*/
+    .tab_content {
+      display: none;
+      clear: both;
+      overflow: hidden;
+    }
+
+
+    /*選択されているタブのコンテンツのみを表示*/
+    #mon:checked~#mon_content,
+    #tue:checked~#tue_content,
+    #wed:checked~#wed_content,
+    #thu:checked~#thu_content,
+    #fri:checked~#fri_content,
+    #sat:checked~#sat_content,
+    #sun:checked~#sun_content {
+      display: block;
+    }
+
+    /*選択されているタブのスタイルを変える*/
+    .tabs input:checked+.tab_item {
+      border-bottom: 3px solid #1dcd00;
+      color: #1dcd00;
+    }
+
+    #user_information {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    }
+
+    
+  </style>
+  <script>
+    window.onload = function () {
+      var j = 10;
+      var id_name = '';
+      var id_teacher = '';
+      var id_room = '';
+      var select_option = '';
+      var user_data = {{ user_data| tojson }};
+      for (var k=0;k<=user_data.length;k++){
+        select_option += '<option value="' + String(k) + '">' + user_data[k][1] + '</option>'
+      }
+    document.getElementById("user_information").innerHTML = '管理者用ページです。<select id="user_select" size="1" onchange="select_change()">' + select_option + '</select><button type="button" onclick="submit()">保存</button>';
+    }
+    function submit() {
+      xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://university-life-useful-bot.herokuapp.com/submit', true);
+      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+      var request = "university_name=" + document.getElementById("university_name").value + "&university_department=" + document.getElementById("university_department").value + "&home_station=" + document.getElementById("home_station").value + "&university_station=" + document.getElementById("university_station").value + "&train_line1=" + document.getElementById("train_line1").value + "&train_line2=" + document.getElementById("train_line2").value + "&train_line3=" + document.getElementById("train_line3").value + "&train_line4=" + document.getElementById("train_line4").value;
+      for(var i=1;i<=35;i++){
+        id_name = "tt" + String(i) + "_name";
+        id_teacher = "tt" + String(i) + "_teacher";
+        id_room = "tt" + String(i) + "_room";
+        id_name2 = "&tt" + String(i) + "_name=";
+        id_teacher2 = "&tt" + String(i) + "_teacher=";
+        id_room2 = "&tt" + String(i) + "_room=";
+        request += id_name2 + document.getElementById(id_name).value + id_teacher2 + document.getElementById(id_teacher).value + id_room2 + document.getElementById(id_room).value;
+      }
+      xhr.send(request);
+    }
+
+  </script>
+</head>
+
+<body>
+  <header>
+    <div style="height:50px;text-align:center;display:table;width:100%"><span class="hptitle">大学生活便利Bot</span></div>
+  </header>
+  <div style="padding-top:50px">
+    <div id="user_information">
+    </div>
+    <div class="cp_iptxt">
+      大学情報
+      <label class="ef">
+        <input type="text" id="university_name" placeholder="大学名">
+        <input type="text" id="university_department" placeholder="学部名">
+      </label>
+    </div>
+    <div class="cp_iptxt">
+      最寄り駅情報
+      <label class="ef">
+        <input type="text" id="home_station" placeholder="自宅">
+        <input type="text" id="university_station" placeholder="大学">
+      </label>
+    </div>
+    <div class="cp_iptxt">
+      運行情報を知りたい路線
+      <label class="ef">
+        <input type="text" id="train_line1" placeholder="路線1">
+        <input type="text" id="train_line2" placeholder="路線2">
+        <input type="text" id="train_line3" placeholder="路線3">
+        <input type="text" id="train_line4" placeholder="路線4">
+      </label>
+    </div>
+    
+    <div class="tabs">
+      <input id="mon" type="radio" name="tab_item" checked>
+      <label class="tab_item" for="mon">月曜日</label>
+      <input id="tue" type="radio" name="tab_item">
+      <label class="tab_item" for="tue">火曜日</label>
+      <input id="wed" type="radio" name="tab_item">
+      <label class="tab_item" for="wed">水曜日</label>
+      <input id="thu" type="radio" name="tab_item">
+      <label class="tab_item" for="thu">木曜日</label>
+      <input id="fri" type="radio" name="tab_item">
+      <label class="tab_item" for="fri">金曜日</label>
+      <input id="sat" type="radio" name="tab_item">
+      <label class="tab_item" for="sat">土曜日</label>
+      <input id="sun" type="radio" name="tab_item">
+      <label class="tab_item" for="sun">日曜日</label>
+
+      <div class="tab_content" id="mon_content">
+        <div class="cp_iptxt">
+          1限
+          <label class="ef">
+            <input type="text" id="tt1_name" placeholder="授業名">
+            <input type="text" id="tt1_teacher" placeholder="担当者名">
+            <input type="text" id="tt1_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          2限
+          <label class="ef">
+            <input type="text" id="tt2_name" placeholder="授業名">
+            <input type="text" id="tt2_teacher" placeholder="担当者名">
+            <input type="text" id="tt2_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          3限
+          <label class="ef">
+            <input type="text" id="tt3_name" placeholder="授業名">
+            <input type="text" id="tt3_teacher" placeholder="担当者名">
+            <input type="text" id="tt3_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          4限
+          <label class="ef">
+            <input type="text" id="tt4_name" placeholder="授業名">
+            <input type="text" id="tt4_teacher" placeholder="担当者名">
+            <input type="text" id="tt4_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          5限
+          <label class="ef">
+            <input type="text" id="tt5_name" placeholder="授業名">
+            <input type="text" id="tt5_teacher" placeholder="担当者名">
+            <input type="text" id="tt5_room" placeholder="教室名">
+          </label>
+        </div>
+      </div>
+      <div class="tab_content" id="tue_content">
+        <div class="cp_iptxt">
+          1限
+          <label class="ef">
+            <input type="text" id="tt6_name" placeholder="授業名">
+            <input type="text" id="tt6_teacher" placeholder="担当者名">
+            <input type="text" id="tt6_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          2限
+          <label class="ef">
+            <input type="text" id="tt7_name" placeholder="授業名">
+            <input type="text" id="tt7_teacher" placeholder="担当者名">
+            <input type="text" id="tt7_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          3限
+          <label class="ef">
+            <input type="text" id="tt8_name" placeholder="授業名">
+            <input type="text" id="tt8_teacher" placeholder="担当者名">
+            <input type="text" id="tt8_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          4限
+          <label class="ef">
+            <input type="text" id="tt9_name" placeholder="授業名">
+            <input type="text" id="tt9_teacher" placeholder="担当者名">
+            <input type="text" id="tt9_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          5限
+          <label class="ef">
+            <input type="text" id="tt10_name" placeholder="授業名">
+            <input type="text" id="tt10_teacher" placeholder="担当者名">
+            <input type="text" id="tt10_room" placeholder="教室名">
+          </label>
+        </div>
+      </div>
+      <div class="tab_content" id="wed_content">
+        <div class="cp_iptxt">
+          1限
+          <label class="ef">
+            <input type="text" id="tt11_name" placeholder="授業名">
+            <input type="text" id="tt11_teacher" placeholder="担当者名">
+            <input type="text" id="tt11_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          2限
+          <label class="ef">
+            <input type="text" id="tt12_name" placeholder="授業名">
+            <input type="text" id="tt12_teacher" placeholder="担当者名">
+            <input type="text" id="tt12_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          3限
+          <label class="ef">
+            <input type="text" id="tt13_name" placeholder="授業名">
+            <input type="text" id="tt13_teacher" placeholder="担当者名">
+            <input type="text" id="tt13_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          4限
+          <label class="ef">
+            <input type="text" id="tt14_name" placeholder="授業名">
+            <input type="text" id="tt14_teacher" placeholder="担当者名">
+            <input type="text" id="tt14_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          5限
+          <label class="ef">
+            <input type="text" id="tt15_name" placeholder="授業名">
+            <input type="text" id="tt15_teacher" placeholder="担当者名">
+            <input type="text" id="tt15_room" placeholder="教室名">
+          </label>
+        </div>
+      </div>
+      <div class="tab_content" id="thu_content">
+        <div class="cp_iptxt">
+          1限
+          <label class="ef">
+            <input type="text" id="tt16_name" placeholder="授業名">
+            <input type="text" id="tt16_teacher" placeholder="担当者名">
+            <input type="text" id="tt16_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          2限
+          <label class="ef">
+            <input type="text" id="tt17_name" placeholder="授業名">
+            <input type="text" id="tt17_teacher" placeholder="担当者名">
+            <input type="text" id="tt17_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          3限
+          <label class="ef">
+            <input type="text" id="tt18_name" placeholder="授業名">
+            <input type="text" id="tt18_teacher" placeholder="担当者名">
+            <input type="text" id="tt18_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          4限
+          <label class="ef">
+            <input type="text" id="tt19_name" placeholder="授業名">
+            <input type="text" id="tt19_teacher" placeholder="担当者名">
+            <input type="text" id="tt19_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          5限
+          <label class="ef">
+            <input type="text" id="tt20_name" placeholder="授業名">
+            <input type="text" id="tt20_teacher" placeholder="担当者名">
+            <input type="text" id="tt20_room" placeholder="教室名">
+          </label>
+        </div>
+      </div>
+      <div class="tab_content" id="fri_content">
+        <div class="cp_iptxt">
+          1限
+          <label class="ef">
+            <input type="text" id="tt21_name" placeholder="授業名">
+            <input type="text" id="tt21_teacher" placeholder="担当者名">
+            <input type="text" id="tt21_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          2限
+          <label class="ef">
+            <input type="text" id="tt22_name" placeholder="授業名">
+            <input type="text" id="tt22_teacher" placeholder="担当者名">
+            <input type="text" id="tt22_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          3限
+          <label class="ef">
+            <input type="text" id="tt23_name" placeholder="授業名">
+            <input type="text" id="tt23_teacher" placeholder="担当者名">
+            <input type="text" id="tt23_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          4限
+          <label class="ef">
+            <input type="text" id="tt24_name" placeholder="授業名">
+            <input type="text" id="tt24_teacher" placeholder="担当者名">
+            <input type="text" id="tt24_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          5限
+          <label class="ef">
+            <input type="text" id="tt25_name" placeholder="授業名">
+            <input type="text" id="tt25_teacher" placeholder="担当者名">
+            <input type="text" id="tt25_room" placeholder="教室名">
+          </label>
+        </div>
+      </div>
+      <div class="tab_content" id="sat_content">
+        <div class="cp_iptxt">
+          1限
+          <label class="ef">
+            <input type="text" id="tt26_name" placeholder="授業名">
+            <input type="text" id="tt26_teacher" placeholder="担当者名">
+            <input type="text" id="tt26_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          2限
+          <label class="ef">
+            <input type="text" id="tt27_name" placeholder="授業名">
+            <input type="text" id="tt27_teacher" placeholder="担当者名">
+            <input type="text" id="tt27_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          3限
+          <label class="ef">
+            <input type="text" id="tt28_name" placeholder="授業名">
+            <input type="text" id="tt28_teacher" placeholder="担当者名">
+            <input type="text" id="tt28_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          4限
+          <label class="ef">
+            <input type="text" id="tt29_name" placeholder="授業名">
+            <input type="text" id="tt29_teacher" placeholder="担当者名">
+            <input type="text" id="tt29_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          5限
+          <label class="ef">
+            <input type="text" id="tt30_name" placeholder="授業名">
+            <input type="text" id="tt30_teacher" placeholder="担当者名">
+            <input type="text" id="tt30_room" placeholder="教室名">
+          </label>
+        </div>
+      </div>
+      <div class="tab_content" id="sun_content">
+        <div class="cp_iptxt">
+          1限
+          <label class="ef">
+            <input type="text" id="tt31_name" placeholder="授業名">
+            <input type="text" id="tt31_teacher" placeholder="担当者名">
+            <input type="text" id="tt31_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          2限
+          <label class="ef">
+            <input type="text" id="tt32_name" placeholder="授業名">
+            <input type="text" id="tt32_teacher" placeholder="担当者名">
+            <input type="text" id="tt32_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          3限
+          <label class="ef">
+            <input type="text" id="tt33_name" placeholder="授業名">
+            <input type="text" id="tt33_teacher" placeholder="担当者名">
+            <input type="text" id="tt33_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          4限
+          <label class="ef">
+            <input type="text" id="tt34_name" placeholder="授業名">
+            <input type="text" id="tt34_teacher" placeholder="担当者名">
+            <input type="text" id="tt34_room" placeholder="教室名">
+          </label>
+        </div>
+        <div class="cp_iptxt">
+          5限
+          <label class="ef">
+            <input type="text" id="tt35_name" placeholder="授業名">
+            <input type="text" id="tt35_teacher" placeholder="担当者名">
+            <input type="text" id="tt35_room" placeholder="教室名">
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
