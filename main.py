@@ -132,10 +132,7 @@ def submit():
                 return session["name"] + "の設定を保存しました。"
                 break
         else:
-            sql = "INSERT INTO " + DB_TABLE + " VALUES ('" + session["uid"] + "','" + session["name"] + "','" + "','" + "','" + "','" + \
-                "','" + "','" + \
-                "','" + \
-                "','" + \
+            sql = "INSERT INTO " + DB_TABLE + " VALUES ('" + session["uid"] + "','" + session["name"] + "','','','','','','','','"
             for i in range(1, 36, 1):
                 sql += "','" + request.form["tt" + str(i) + "_name"] + "','" + request.form["tt" + str(
                     i) + "_teacher"] + "','" + request.form["tt" + str(i) + "_room"] + ")"
