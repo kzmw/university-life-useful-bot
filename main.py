@@ -136,7 +136,6 @@ def submit():
                 "','" + "','" + \
                 "','" + \
                 "','" + \
-                
             for i in range(1, 36, 1):
                 sql += "','" + request.form["tt" + str(i) + "_name"] + "','" + request.form["tt" + str(
                     i) + "_teacher"] + "','" + request.form["tt" + str(i) + "_room"] + ")"
