@@ -98,12 +98,18 @@ def edit():
                 result = []
                 for s in r:
                     result.append(s)
+                result[1] = session["name"]
                 return render_template("edit.html", user_data=result)
                 break
         else:
-            return render_template("edit.html", user_data=[])
+            result = []
+            for s in range(0,116,1):
+                result.append('')
+            result[0] = session["uid"]
+            result[1] = session["name"]
+            return render_template("edit.html", user_data=result)
     else:
-        return ""
+        return "ログインしてください。"
 
 
 @app.route("/submit", methods=['POST'])
