@@ -147,7 +147,7 @@
       var user_data = {{ user_data | tojson }};
       var admin_num = user_data.length -1;
     if (user_data[admin_num] == true){
-      document.getElementById("user_information").innerHTML = user_data[1] + 'さんの設定ページです。<button type="button" onclick="location.href="https://university-life-useful-bot.herokuapp.com/admin";">管理者ページ</button><button type="button" onclick="submit()">保存</button>';
+      document.getElementById("user_information").innerHTML = user_data[1] + 'さんの設定ページです。<button type="button" onclick="admin()">管理者ページ</button><button type="button" onclick="submit()">保存</button>';
     }
     else{
       document.getElementById("user_information").innerHTML = user_data[1] + 'さんの設定ページです。<button type="button" onclick="submit()">保存</button>';
@@ -162,6 +162,11 @@
     j += 3
     }
     }
+
+    function admin(){
+      location.href="https://university-life-useful-bot.herokuapp.com/admin";
+    }
+
     function submit() {
       xhr = new XMLHttpRequest();
       xhr.open('POST', 'https://university-life-useful-bot.herokuapp.com/submit', true);
