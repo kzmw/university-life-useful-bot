@@ -146,7 +146,7 @@
       var id_room = '';
       var user_data = {{ user_data | tojson }};
       var admin_num = user_data.length -1;
-    if (user_data[admin_num] == "t"){
+    if (user_data[admin_num] == true){
       document.getElementById("user_information").innerHTML = user_data[1] + 'さんの設定ページです。<button type="button" onclick="location.href="https://university-life-useful-bot.herokuapp.com/admin";">管理者ページ</button><button type="button" onclick="submit()">保存</button>';
     }
     else{
